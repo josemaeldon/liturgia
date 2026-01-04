@@ -71,6 +71,29 @@ PostgreSQL:
 - **RAM**: 512 MB
 - **Disco**: 5 GB (inicial)
 
+### ⚠️ Considerações Importantes
+
+**Placement Constraints:**
+- A configuração padrão coloca todos os serviços em nós manager (`node.role == manager`)
+- Isso segue o padrão do Fluxo de Caixa e funciona bem para clusters pequenos
+- Para ambientes multi-node maiores, considere:
+  - Remover a constraint da aplicação para permitir deploy em workers
+  - Manter apenas PostgreSQL e Redis em managers para garantir persistência
+  - Usar volumes compartilhados (NFS, GlusterFS) para dados persistentes
+
+**Volumes:**
+- A configuração usa `driver: local` para volumes
+- Adequado para single-node ou manager-only deployments
+- Para clusters multi-node, considere:
+  - Usar driver de storage compartilhado (NFS, GlusterFS, Ceph)
+  - Ou volumes externos gerenciados pela infraestrutura
+  - Garantir que volumes de dados estejam sempre disponíveis
+
+**Escalabilidade:**
+- Com 2 réplicas padrão, suporta ~40-80 req/s
+- Para aumentar capacidade, escalar réplicas: `docker service scale liturgia_app=5`
+- PostgreSQL não escala horizontalmente (usar read replicas se necessário)
+
 ## ⚙️ Configuração
 
 ### 1. Preparar Variáveis de Ambiente
