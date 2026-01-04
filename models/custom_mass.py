@@ -147,7 +147,7 @@ class CustomMass:
     def set_entrance_antiphon(self, text: str, reference: str = ""):
         """Set the entrance antiphon"""
         antiphon = Antiphon("Entrada", text, reference)
-        self.parts["entrance"].content = str(antiphon)
+        self.parts["entrance_antiphon"].content = str(antiphon)
     
     def set_readings(self, first_reading: str = "", psalm: str = "", 
                     second_reading: str = "", gospel: str = ""):

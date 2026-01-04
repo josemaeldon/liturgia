@@ -42,12 +42,13 @@ def demo_liturgy_hours():
     laudes = LiturgiaHoras.get_laudes(date)
     print(laudes.format()[:800] + "...\n")
     
-    print("✓ Liturgia das Horas completa disponível:")
+    print("✓ Liturgia das Horas COMPLETA disponível:")
     print("  • Ofício das Leituras")
     print("  • Laudes (Oração da Manhã)")
-    print("  • Hora Média (Terça, Sexta, Nona)")
+    print("  • Hora Média: Terça (9h), Sexta (12h), Nona (15h)")
     print("  • Vésperas (Oração da Tarde)")
     print("  • Completas (Oração da Noite)")
+    print("\n✓ Total: 7 horas canônicas implementadas")
 
 
 def demo_custom_mass():
@@ -76,11 +77,11 @@ def demo_custom_mass():
     print("Exemplo de Missa Personalizada (partes principais):\n")
     print(mass.get_full_text()[:1000] + "...\n")
     
-    print("✓ 28 partes personalizáveis da missa:")
-    print("  • Ritos Iniciais: Entrada, Saudação, Kyrie, Glória, Coleta")
-    print("  • Liturgia da Palavra: Leituras, Salmo, Evangelho, Credo, Orações")
-    print("  • Liturgia Eucarística: Ofertório, Prefácio, Santo, Oração Eucarística")
-    print("  • Ritos Finais: Bênção, Despedida")
+    print("✓ 77 partes personalizáveis da missa:")
+    print("  • Ritos Iniciais (12 partes)")
+    print("  • Liturgia da Palavra (14 partes)")
+    print("  • Liturgia Eucarística (43 partes)")
+    print("  • Ritos Finais (8 partes)")
     print("\n✓ Exportação para TXT, PDF e DOCX")
 
 
@@ -135,8 +136,13 @@ def main():
     print_section("RECURSOS IMPLEMENTADOS")
     print("""
 ✓ Sistema completo de Liturgia Diária
-✓ Liturgia das Horas (5 horas canônicas)
-✓ Missa personalizada com 28 partes configuráveis
+✓ Liturgia das Horas COMPLETA (todas as 7 horas canônicas)
+  • Ofício das Leituras, Laudes, Terça, Sexta, Nona, Vésperas, Completas
+✓ Missa personalizada com 77 partes configuráveis
+  • 12 partes dos Ritos Iniciais
+  • 14 partes da Liturgia da Palavra
+  • 43 partes da Liturgia Eucarística
+  • 8 partes dos Ritos Finais
 ✓ Calendário litúrgico
 ✓ Cores litúrgicas
 ✓ Exportação para TXT, PDF, DOCX
