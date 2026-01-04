@@ -15,6 +15,26 @@ from models.custom_mass import CustomMass
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
 
+# Database configuration (optional - for future use with PostgreSQL)
+# Currently the app uses in-memory data structures
+# To enable database support, uncomment and configure:
+#
+# from flask_sqlalchemy import SQLAlchemy
+# 
+# db_connection = os.environ.get('DB_CONNECTION', 'sqlite')
+# if db_connection == 'pgsql':
+#     db_host = os.environ.get('DB_HOST', 'localhost')
+#     db_port = os.environ.get('DB_PORT', '5432')
+#     db_database = os.environ.get('DB_DATABASE', 'liturgia_db')
+#     db_username = os.environ.get('DB_USERNAME', 'postgres')
+#     db_password = os.environ.get('DB_PASSWORD', '')
+#     app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{db_username}:{db_password}@{db_host}:{db_port}/{db_database}'
+# else:
+#     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///liturgia.db'
+# 
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# db = SQLAlchemy(app)
+
 # Configure upload folder for temporary PDF files
 # In production, use a secure directory with proper permissions
 UPLOAD_FOLDER = os.environ.get('UPLOAD_FOLDER', '/tmp/liturgia_pdfs')

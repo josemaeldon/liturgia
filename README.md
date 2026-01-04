@@ -124,6 +124,37 @@ pip install -r requirements.txt
 - Python 3.8+
 - Bibliotecas listadas em requirements.txt
 
+## 🐳 Deploy em Produção
+
+Para deploy em produção com **PostgreSQL + Apache** no Docker Swarm:
+
+📖 **[Guia Completo de Deploy: POSTGRES_APACHE_DEPLOYMENT.md](POSTGRES_APACHE_DEPLOYMENT.md)**
+
+Este guia inclui:
+- Stack completa com PostgreSQL, Apache e Redis
+- Configuração com Traefik para SSL automático
+- Variáveis de ambiente e secrets
+- Backup e restore
+- Monitoramento e troubleshooting
+
+### Deploy Rápido
+
+```bash
+# 1. Configurar variáveis de ambiente
+cp .env.example .env
+# Editar .env com suas configurações
+
+# 2. Deploy no Docker Swarm
+docker stack deploy -c docker-compose.yml liturgia
+
+# 3. Verificar status
+docker stack services liturgia
+```
+
+Veja também:
+- [DEPLOYMENT.md](DEPLOYMENT.md) - Outras opções de deploy (Gunicorn, Nginx, etc)
+- [DOCKER_DEPLOYMENT.md](DOCKER_DEPLOYMENT.md) - Deploy básico com Docker
+
 ## Exemplos
 
 Veja a pasta `examples/` para exemplos completos de liturgias, incluindo:
