@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block title %}Gerenciar Partes da Missa{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <!-- Page Header -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body text-center py-4">
+                    <h1 class="h2 mb-2">
+                        <i class="bi bi-list-check text-primary"></i>
+                        Gerenciar Partes da Missa
+                    </h1>
+                    <p class="text-muted mb-0">
+                        Configure textos fixos da celebração eucarística
+                    </p>
+                </div>
+            </div>
+
+            <!-- Mass Structure Info -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="mb-3">Estrutura da Missa</h5>
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <div class="alert alert-primary mb-0">
+                                <strong>Ritos Iniciais</strong>
+                                <p class="small mb-0 mt-2">12 partes</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="alert alert-success mb-0">
+                                <strong>Liturgia da Palavra</strong>
+                                <p class="small mb-0 mt-2">14 partes</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="alert alert-warning mb-0">
+                                <strong>Liturgia Eucarística</strong>
+                                <p class="small mb-0 mt-2">43 partes</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="alert alert-danger mb-0">
+                                <strong>Ritos Finais</strong>
+                                <p class="small mb-0 mt-2">8 partes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit Form -->
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h5 class="mb-4">Adicionar/Editar Parte</h5>
+                    <form method="POST" action="{{ url_for('manage_mass_parts') }}" class="needs-validation" novalidate>
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label for="part_category" class="form-label">Categoria *</label>
+                                <select class="form-select" id="part_category" name="part_category" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="ritos_iniciais">Ritos Iniciais</option>
+                                    <option value="liturgia_palavra">Liturgia da Palavra</option>
+                                    <option value="liturgia_eucaristica">Liturgia Eucarística</option>
+                                    <option value="ritos_finais">Ritos Finais</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+                                <label for="part_name" class="form-label">Nome da Parte *</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="part_name" 
+                                       name="part_name" 
+                                       placeholder="Ex: Glória"
+                                       required>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="part_text" class="form-label">Texto *</label>
+                            <textarea class="form-control" 
+                                      id="part_text" 
+                                      name="part_text" 
+                                      rows="10"
+                                      placeholder="Digite o texto fixo desta parte da missa..."
+                                      required></textarea>
+                            <div class="form-text">Digite o texto completo desta parte da celebração</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label for="part_variation" class="form-label">Variação (Opcional)</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="part_variation" 
+                                       name="part_variation" 
+                                       placeholder="Ex: Forma A, Forma B">
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+                                <label for="part_notes" class="form-label">Notas (Opcional)</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="part_notes" 
+                                       name="part_notes" 
+                                       placeholder="Observações sobre esta parte">
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{{ url_for('admin') }}" class="btn btn-outline-secondary">
+                                <i class="bi bi-x-circle me-2"></i>
+                                Voltar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle me-2"></i>
+                                Salvar Parte
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Common Parts List -->
+            <div class="card shadow-sm mt-4">
+                <div class="card-body">
+                    <h5 class="mb-3">Partes Fixas Comuns</h5>
+                    <div class="accordion" id="massPartsAccordion">
+                        <!-- Initial Rites -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#initialRites">
+                                    Ritos Iniciais (12)
+                                </button>
+                            </h2>
+                            <div id="initialRites" class="accordion-collapse collapse" data-bs-parent="#massPartsAccordion">
+                                <div class="accordion-body">
+                                    <ul class="list-unstyled">
+                                        <li><i class="bi bi-check-circle text-success me-2"></i>Sinal da Cruz</li>
+                                        <li><i class="bi bi-check-circle text-success me-2"></i>Saudação</li>
+                                        <li><i class="bi bi-check-circle text-success me-2"></i>Ato Penitencial</li>
+                                        <li><i class="bi bi-check-circle text-success me-2"></i>Kyrie</li>
+                                        <li><i class="bi bi-check-circle text-success me-2"></i>Glória</li>
+                                        <li><i class="bi bi-check-circle text-success me-2"></i>Oração da Coleta</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Eucharistic Liturgy -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#eucharisticLiturgy">
+                                    Liturgia Eucarística (43)
+                                </button>
+                            </h2>
+                            <div id="eucharisticLiturgy" class="accordion-collapse collapse" data-bs-parent="#massPartsAccordion">
+                                <div class="accordion-body">
+                                    <ul class="list-unstyled">
+                                        <li><i class="bi bi-check-circle text-success me-2"></i>Preparação das Oferendas</li>
+                                        <li><i class="bi bi-check-circle text-success me-2"></i>Oração sobre as Oferendas</li>
+                                        <li><i class="bi bi-check-circle text-success me-2"></i>Prefácio</li>
+                                        <li><i class="bi bi-check-circle text-success me-2"></i>Santo</li>
+                                        <li><i class="bi bi-check-circle text-success me-2"></i>Oração Eucarística I-IV</li>
+                                        <li><i class="bi bi-check-circle text-success me-2"></i>Pai Nosso</li>
+                                        <li><i class="bi bi-check-circle text-success me-2"></i>Cordeiro de Deus</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block title %}Gerenciar Liturgia das Horas{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <!-- Page Header -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body text-center py-4">
+                    <h1 class="h2 mb-2">
+                        <i class="bi bi-clock-history text-primary"></i>
+                        Gerenciar Liturgia das Horas
+                    </h1>
+                    <p class="text-muted mb-0">
+                        Gerencie as horas canônicas do sistema
+                    </p>
+                </div>
+            </div>
+
+            <!-- Hour Type Selection -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="mb-3">Selecione a Hora Canônica</h5>
+                    <div class="row g-3">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card border-primary h-100">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-moon-stars display-4 text-primary mb-2"></i>
+                                    <h6>Ofício das Leituras</h6>
+                                    <p class="text-muted small mb-0">Matutino</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card border-warning h-100">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-sunrise display-4 text-warning mb-2"></i>
+                                    <h6>Laudes</h6>
+                                    <p class="text-muted small mb-0">Oração da Manhã</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card border-info h-100">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-sun display-4 text-info mb-2"></i>
+                                    <h6>Hora Média</h6>
+                                    <p class="text-muted small mb-0">Terça, Sexta, Nona</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card border-danger h-100">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-sunset display-4 text-danger mb-2"></i>
+                                    <h6>Vésperas</h6>
+                                    <p class="text-muted small mb-0">Oração da Tarde</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card border-secondary h-100">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-moon display-4 text-secondary mb-2"></i>
+                                    <h6>Completas</h6>
+                                    <p class="text-muted small mb-0">Oração da Noite</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit Form -->
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h5 class="mb-4">Editar Hora Canônica</h5>
+                    <form method="POST" action="{{ url_for('manage_liturgy_hours') }}" class="needs-validation" novalidate>
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label for="hour_date" class="form-label">Data *</label>
+                                <input type="date" 
+                                       class="form-control" 
+                                       id="hour_date" 
+                                       name="hour_date" 
+                                       value="{{ today }}"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+                                <label for="hour_type" class="form-label">Hora *</label>
+                                <select class="form-select" id="hour_type" name="hour_type" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="office_readings">Ofício das Leituras</option>
+                                    <option value="laudes">Laudes</option>
+                                    <option value="terca">Terça</option>
+                                    <option value="sexta">Sexta</option>
+                                    <option value="nona">Nona</option>
+                                    <option value="vesperas">Vésperas</option>
+                                    <option value="completas">Completas</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="hour_psalms" class="form-label">Salmos</label>
+                            <textarea class="form-control" 
+                                      id="hour_psalms" 
+                                      name="hour_psalms" 
+                                      rows="6"
+                                      placeholder="Digite os salmos da hora..."></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="hour_reading" class="form-label">Leitura</label>
+                            <textarea class="form-control" 
+                                      id="hour_reading" 
+                                      name="hour_reading" 
+                                      rows="6"
+                                      placeholder="Digite a leitura da hora..."></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="hour_prayer" class="form-label">Oração</label>
+                            <textarea class="form-control" 
+                                      id="hour_prayer" 
+                                      name="hour_prayer" 
+                                      rows="4"
+                                      placeholder="Digite a oração da hora..."></textarea>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{{ url_for('admin') }}" class="btn btn-outline-secondary">
+                                <i class="bi bi-x-circle me-2"></i>
+                                Voltar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle me-2"></i>
+                                Salvar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}Gerenciar Salmos{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <!-- Page Header -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body text-center py-4">
+                    <h1 class="h2 mb-2">
+                        <i class="bi bi-music-note-beamed text-primary"></i>
+                        Gerenciar Salmos Responsoriais
+                    </h1>
+                    <p class="text-muted mb-0">
+                        Adicione e edite salmos responsoriais do sistema
+                    </p>
+                </div>
+            </div>
+
+            <!-- Add Psalm Form -->
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h5 class="mb-4">Adicionar/Editar Salmo</h5>
+                    <form method="POST" action="{{ url_for('manage_psalms') }}" class="needs-validation" novalidate>
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label for="psalm_number" class="form-label">Número do Salmo *</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="psalm_number" 
+                                       name="psalm_number" 
+                                       placeholder="Ex: Salmo 23"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+                                <label for="psalm_reference" class="form-label">Referência *</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="psalm_reference" 
+                                       name="psalm_reference" 
+                                       placeholder="Ex: Sl 23 (22), 1-3.4.5.6"
+                                       required>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="psalm_response" class="form-label">Refrão *</label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="psalm_response" 
+                                   name="psalm_response" 
+                                   placeholder="Ex: O Senhor é o meu pastor, nada me falta."
+                                   required>
+                            <div class="form-text">Digite o refrão do salmo responsorial</div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="psalm_verses" class="form-label">Versos do Salmo *</label>
+                            <textarea class="form-control" 
+                                      id="psalm_verses" 
+                                      name="psalm_verses" 
+                                      rows="12"
+                                      placeholder="Digite os versos do salmo, um por linha..."
+                                      required></textarea>
+                            <div class="form-text">Cole os versos completos do salmo. Separe cada verso com uma linha.</div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{{ url_for('admin') }}" class="btn btn-outline-secondary">
+                                <i class="bi bi-x-circle me-2"></i>
+                                Voltar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle me-2"></i>
+                                Salvar Salmo
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- List of Psalms -->
+            <div class="card shadow-sm mt-4">
+                <div class="card-body">
+                    <h5 class="mb-3">Salmos Cadastrados</h5>
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle me-2"></i>
+                        Sistema de listagem de salmos em desenvolvimento
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

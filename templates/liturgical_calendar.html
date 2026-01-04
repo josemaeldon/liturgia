@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+
+{% block title %}Calendário Litúrgico{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <!-- Page Header -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body text-center py-4">
+                    <h1 class="h2 mb-2">
+                        <i class="bi bi-calendar3 text-primary"></i>
+                        Calendário Litúrgico
+                    </h1>
+                    <p class="text-muted mb-0">
+                        Configure e visualize o calendário do ano litúrgico
+                    </p>
+                </div>
+            </div>
+
+            <!-- Year Selection -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-4">
+                            <label for="year_select" class="form-label">Ano Litúrgico</label>
+                            <select class="form-select" id="year_select" onchange="loadYear(this.value)">
+                                <option value="2024">2024 (Ano B)</option>
+                                <option value="2025" selected>2025 (Ano C)</option>
+                                <option value="2026">2026 (Ano A)</option>
+                                <option value="2027">2027 (Ano B)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-8 text-md-end mt-3 mt-md-0">
+                            <button class="btn btn-outline-primary me-2" onclick="exportCalendar()">
+                                <i class="bi bi-download me-2"></i>Exportar
+                            </button>
+                            <button class="btn btn-primary" onclick="importCalendar()">
+                                <i class="bi bi-upload me-2"></i>Importar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendar Overview -->
+            <div class="row g-4 mb-4">
+                <!-- Advent -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm border-start border-4 border-purple">
+                        <div class="card-body">
+                            <h5 class="text-purple">
+                                <i class="bi bi-star me-2"></i>Advento
+                            </h5>
+                            <p class="text-muted small mb-2">4 domingos de preparação</p>
+                            <div class="small">
+                                <strong>Início:</strong> Nov 30, 2025<br>
+                                <strong>Fim:</strong> Dez 24, 2025
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Christmas -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm border-start border-4 border-white">
+                        <div class="card-body">
+                            <h5 class="text-dark">
+                                <i class="bi bi-brightness-high me-2"></i>Tempo do Natal
+                            </h5>
+                            <p class="text-muted small mb-2">Celebração do Nascimento</p>
+                            <div class="small">
+                                <strong>Início:</strong> Dez 25, 2025<br>
+                                <strong>Fim:</strong> Jan 12, 2026
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lent -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm border-start border-4 border-purple">
+                        <div class="card-body">
+                            <h5 class="text-purple">
+                                <i class="bi bi-heart me-2"></i>Quaresma
+                            </h5>
+                            <p class="text-muted small mb-2">40 dias de penitência</p>
+                            <div class="small">
+                                <strong>Início:</strong> Fev 18, 2026<br>
+                                <strong>Fim:</strong> Abr 1, 2026
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Easter -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm border-start border-4 border-white">
+                        <div class="card-body">
+                            <h5 class="text-dark">
+                                <i class="bi bi-sun me-2"></i>Tempo Pascal
+                            </h5>
+                            <p class="text-muted small mb-2">50 dias de alegria</p>
+                            <div class="small">
+                                <strong>Início:</strong> Abr 5, 2026<br>
+                                <strong>Fim:</strong> Mai 24, 2026
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Special Dates -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="mb-3">Solenidades e Festas Principais</h5>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Celebração</th>
+                                    <th>Tipo</th>
+                                    <th>Cor</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>06/01/2026</td>
+                                    <td>Epifania do Senhor</td>
+                                    <td><span class="badge bg-primary">Solenidade</span></td>
+                                    <td><span class="badge bg-light text-dark">Branco</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary" onclick="editDate('2026-01-06')">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>02/02/2026</td>
+                                    <td>Apresentação do Senhor</td>
+                                    <td><span class="badge bg-info">Festa</span></td>
+                                    <td><span class="badge bg-light text-dark">Branco</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary" onclick="editDate('2026-02-02')">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>19/03/2026</td>
+                                    <td>São José</td>
+                                    <td><span class="badge bg-primary">Solenidade</span></td>
+                                    <td><span class="badge bg-light text-dark">Branco</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary" onclick="editDate('2026-03-19')">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Back Button -->
+            <div class="text-center mb-4">
+                <a href="{{ url_for('admin') }}" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left me-2"></i>Voltar ao Admin
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.border-purple {
+    border-color: #6f42c1 !important;
+}
+.text-purple {
+    color: #6f42c1;
+}
+</style>
+
+<script>
+function loadYear(year) {
+    alert('Carregando calendário para o ano: ' + year);
+}
+
+function exportCalendar() {
+    alert('Funcionalidade de exportação em desenvolvimento');
+}
+
+function importCalendar() {
+    alert('Funcionalidade de importação em desenvolvimento');
+}
+
+function editDate(date) {
+    alert('Editar data: ' + date);
+}
+</script>
+{% endblock %}

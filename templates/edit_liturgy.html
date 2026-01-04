@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Liturgia{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <!-- Page Header -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body text-center py-4">
+                    <h1 class="h2 mb-2">
+                        <i class="bi bi-pencil text-primary"></i>
+                        Editar Liturgia
+                    </h1>
+                    <p class="text-muted mb-0">
+                        Edite liturgias existentes no sistema
+                    </p>
+                </div>
+            </div>
+
+            <!-- Search Section -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="mb-3">Buscar Liturgia</h5>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input type="date" 
+                                   class="form-control" 
+                                   id="search_date" 
+                                   value="{{ today }}"
+                                   placeholder="Buscar por data">
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-primary w-100" onclick="searchLiturgy()">
+                                <i class="bi bi-search me-2"></i>Buscar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit Form -->
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <form method="POST" action="{{ url_for('edit_liturgy') }}" class="needs-validation" novalidate>
+                        <input type="hidden" name="liturgy_id" id="liturgy_id" value="">
+
+                        <div class="mb-4">
+                            <label for="liturgy_date" class="form-label">Data *</label>
+                            <input type="date" 
+                                   class="form-control" 
+                                   id="liturgy_date" 
+                                   name="liturgy_date" 
+                                   value="{{ today }}"
+                                   required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="celebration_name" class="form-label">Nome da Celebração *</label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="celebration_name" 
+                                   name="celebration_name" 
+                                   placeholder="Ex: Solenidade da Epifania do Senhor"
+                                   required>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label for="celebration_type" class="form-label">Tipo *</label>
+                                <select class="form-select" id="celebration_type" name="celebration_type" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="solenidade">Solenidade</option>
+                                    <option value="festa">Festa</option>
+                                    <option value="memoria_obrigatoria">Memória Obrigatória</option>
+                                    <option value="memoria_facultativa">Memória Facultativa</option>
+                                    <option value="feria">Féria</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+                                <label for="liturgical_color" class="form-label">Cor Litúrgica *</label>
+                                <select class="form-select" id="liturgical_color" name="liturgical_color" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="branco">Branco</option>
+                                    <option value="vermelho">Vermelho</option>
+                                    <option value="verde">Verde</option>
+                                    <option value="roxo">Roxo</option>
+                                    <option value="dourado">Dourado</option>
+                                    <option value="preto">Preto</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="season" class="form-label">Tempo Litúrgico *</label>
+                            <select class="form-select" id="season" name="season" required>
+                                <option value="">Selecione...</option>
+                                <option value="Advento">Advento</option>
+                                <option value="Tempo do Natal">Tempo do Natal</option>
+                                <option value="Quaresma">Quaresma</option>
+                                <option value="Tríduo Pascal">Tríduo Pascal</option>
+                                <option value="Tempo Pascal">Tempo Pascal</option>
+                                <option value="Tempo Comum">Tempo Comum</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{{ url_for('admin') }}" class="btn btn-outline-secondary">
+                                <i class="bi bi-x-circle me-2"></i>
+                                Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle me-2"></i>
+                                Salvar Alterações
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function searchLiturgy() {
+    const date = document.getElementById('search_date').value;
+    if (date) {
+        // In a real implementation, this would fetch liturgy data via AJAX
+        alert('Buscar liturgia para: ' + date);
+    }
+}
+</script>
+{% endblock %}
