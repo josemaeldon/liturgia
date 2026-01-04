@@ -117,7 +117,7 @@ Faltava:
 
 - **4 novos documentos**
 - **52 KB** de nova documentação
-- **~3.000 linhas** de conteúdo novo
+- **Aproximadamente 3.000 linhas** de conteúdo novo
 
 ### Cobertura
 

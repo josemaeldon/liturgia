@@ -161,7 +161,7 @@ sudo -u postgres psql
 
 # No prompt do PostgreSQL, execute:
 CREATE DATABASE liturgia_db;
-CREATE USER liturgia_user WITH PASSWORD 'sua_senha_aqui';
+CREATE USER liturgia_user WITH PASSWORD 'YOUR_SECURE_PASSWORD_HERE';
 GRANT ALL PRIVILEGES ON DATABASE liturgia_db TO liturgia_user;
 \q
 ```
@@ -175,7 +175,7 @@ export DB_HOST=localhost
 export DB_PORT=5432
 export DB_DATABASE=liturgia_db
 export DB_USERNAME=liturgia_user
-export DB_PASSWORD=sua_senha_aqui
+export DB_PASSWORD=YOUR_SECURE_PASSWORD_HERE
 export SECRET_KEY=dev-secret-key-change-in-production
 export FLASK_ENV=development
 export FLASK_DEBUG=true
@@ -188,7 +188,7 @@ $env:DB_HOST="localhost"
 $env:DB_PORT="5432"
 $env:DB_DATABASE="liturgia_db"
 $env:DB_USERNAME="liturgia_user"
-$env:DB_PASSWORD="sua_senha_aqui"
+$env:DB_PASSWORD="YOUR_SECURE_PASSWORD_HERE"
 $env:SECRET_KEY="dev-secret-key-change-in-production"
 $env:FLASK_ENV="development"
 $env:FLASK_DEBUG="true"
@@ -211,7 +211,7 @@ DB_HOST=localhost
 DB_PORT=5432
 DB_DATABASE=liturgia_db
 DB_USERNAME=liturgia_user
-DB_PASSWORD=sua_senha_aqui
+DB_PASSWORD=YOUR_SECURE_PASSWORD_HERE
 SECRET_KEY=dev-secret-key-change-in-production
 FLASK_ENV=development
 FLASK_DEBUG=true

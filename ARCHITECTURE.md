@@ -19,7 +19,7 @@ Documentação técnica da arquitetura, componentes e design do Sistema Liturgia
 
 ## 🎯 Visão Geral
 
-O Sistema Liturgia é uma **aplicação web monolítica** construída com Flask (Python), utilizando PostgreSQL como banco de dados principal e Redis para cache. A aplicação segue o padrão **MVC (Model-View-Controller)** adaptado para Flask.
+O Sistema Liturgia é uma **aplicação web monolítica** construída com Flask (Python), utilizando PostgreSQL como banco de dados principal e Redis para cache. A aplicação segue uma **arquitetura baseada em Blueprints e padrões Flask**, com separação clara entre camadas de apresentação, lógica de negócio e acesso a dados.
 
 ### Características Arquiteturais
 

@@ -140,14 +140,14 @@ services:
       DB_PORT: 5432
       DB_DATABASE: liturgia_db
       DB_USERNAME: postgres
-      DB_PASSWORD: "MUDE_ESTA_SENHA_AQUI_123"  # ⚠️ ALTERAR
+      DB_PASSWORD: "YOUR_SECURE_PASSWORD_HERE"  # ⚠️ ALTERAR
 
       # Redis configuration
       REDIS_HOST: redis
       REDIS_PORT: 6379
 
       # Flask secret key - CHANGE THIS
-      SECRET_KEY: "MUDE_ESTA_CHAVE_SECRETA_ALEATORIA_456"  # ⚠️ ALTERAR
+      SECRET_KEY: "your-random-64-character-secret-key-generated-with-openssl-here"  # ⚠️ ALTERAR
       FLASK_ENV: production
       FLASK_DEBUG: "false"
       UPLOAD_FOLDER: /var/www/storage
@@ -204,7 +204,7 @@ services:
     environment:
       POSTGRES_DB: liturgia_db
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: "MUDE_ESTA_SENHA_AQUI_123"  # ⚠️ DEVE SER IGUAL À DB_PASSWORD
+      POSTGRES_PASSWORD: "YOUR_SECURE_PASSWORD_HERE"  # ⚠️ DEVE SER IGUAL À DB_PASSWORD
       PGDATA: /var/lib/postgresql/data/pgdata
 
     volumes:
@@ -279,14 +279,14 @@ networks:
 
 #### 4.1. Senhas do Banco de Dados
 
-Encontre estas duas linhas e mude a senha:
+Encontre estas duas linhas e mude a senha (use uma senha forte e segura):
 
 ```yaml
 # Linha ~28 (serviço app)
-DB_PASSWORD: "MUDE_ESTA_SENHA_AQUI_123"
+DB_PASSWORD: "YOUR_SECURE_PASSWORD_HERE"
 
 # Linha ~97 (serviço postgres)
-POSTGRES_PASSWORD: "MUDE_ESTA_SENHA_AQUI_123"
+POSTGRES_PASSWORD: "YOUR_SECURE_PASSWORD_HERE"
 ```
 
 ⚠️ **As duas senhas DEVEM ser iguais!**
@@ -298,10 +298,10 @@ POSTGRES_PASSWORD: "MUDE_ESTA_SENHA_AQUI_123"
 
 #### 4.2. Flask Secret Key
 
-Encontre e mude:
+Encontre e mude (use uma chave gerada com openssl rand -hex 32):
 
 ```yaml
-SECRET_KEY: "MUDE_ESTA_CHAVE_SECRETA_ALEATORIA_456"
+SECRET_KEY: "your-random-64-character-secret-key-generated-with-openssl-here"
 ```
 
 **Como gerar uma chave secreta:**

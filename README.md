@@ -109,7 +109,7 @@ Para deploy em produção usando Portainer:
 
 ### ⚡ Outras Opções de Deploy
 
-- 🐋 **[Docker Compose Local](DOCKER_DEPLOYMENT.md)** - Deploy rápido com Docker
+- 🐋 **[Docker Deployment](DOCKER_DEPLOYMENT.md)** - Deploy rápido com Docker
 - 📖 **[Deploy Manual](DEPLOYMENT.md)** - Gunicorn, Nginx, Systemd
 - 🗄️ **[PostgreSQL + Apache](POSTGRES_APACHE_DEPLOYMENT.md)** - Stack completa
 
