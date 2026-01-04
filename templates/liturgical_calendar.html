@@ -220,7 +220,7 @@ function importCalendar() {
 
 function editDate(date) {
     // In a real implementation, this would open an edit form or navigate to edit page
-    window.location.href = '/admin/edit-liturgy?date=' + date;
+    window.location.href = "{{ url_for('edit_liturgy') }}?date=" + date;
 }
 </script>
 {% endblock %}
