@@ -126,8 +126,17 @@ pip install -r requirements.txt
 
 ## 🐳 Deploy em Produção
 
+### 🎯 Stack Completa com PostgreSQL
+
+O sistema está **totalmente integrado com PostgreSQL** e pronto para produção:
+
+✅ **Banco de dados automático** - Tabelas e dados iniciais criados no primeiro deploy  
+✅ **Todas as variáveis configuradas** - Sem dependência de arquivos .env  
+✅ **Migrations suportadas** - Flask-Migrate para evolução do schema  
+
 ### Guias de Deployment
 
+- 🗄️ **[Database Integration: DATABASE_INTEGRATION.md](DATABASE_INTEGRATION.md)** - Como funciona o PostgreSQL
 - 🚀 **[Deploy Rápido: QUICK_DEPLOYMENT.md](QUICK_DEPLOYMENT.md)** - Referência rápida e comparação de opções
 - 📖 **[PostgreSQL + Apache: POSTGRES_APACHE_DEPLOYMENT.md](POSTGRES_APACHE_DEPLOYMENT.md)** - Stack completa para produção
 - 📘 **[Outras Opções: DEPLOYMENT.md](DEPLOYMENT.md)** - Gunicorn, Nginx, Systemd
@@ -135,19 +144,33 @@ pip install -r requirements.txt
 
 ### Deploy Rápido (PostgreSQL + Apache + Docker Swarm)
 
+⚠️ **IMPORTANTE**: Edite o `docker-compose.yml` e altere:
+- `DB_PASSWORD` (linha 29 e linha 107)
+- `SECRET_KEY` (linha 36)
+
 ```bash
-# 1. Configurar variáveis de ambiente
-cp .env.example .env
-# Editar .env com suas configurações
+# 1. Editar senhas no docker-compose.yml
+nano docker-compose.yml
+# Mudar DB_PASSWORD e SECRET_KEY
 
 # 2. Deploy no Docker Swarm
 docker stack deploy -c docker-compose.yml liturgia
 
 # 3. Verificar status
 docker stack services liturgia
+
+# 4. Ver logs (aguardar inicialização do banco)
+docker service logs -f liturgia_app
 ```
 
+**O que acontece no primeiro deploy:**
+1. PostgreSQL sobe e cria o banco `liturgia_db`
+2. App aguarda PostgreSQL ficar pronto
+3. Script `init_db.py` cria tabelas e insere dados iniciais
+4. Apache inicia e aplicação fica disponível
+
 Veja também:
+- [DATABASE_INTEGRATION.md](DATABASE_INTEGRATION.md) - Detalhes do banco de dados
 - [DEPLOYMENT.md](DEPLOYMENT.md) - Outras opções de deploy (Gunicorn, Nginx, etc)
 - [DOCKER_DEPLOYMENT.md](DOCKER_DEPLOYMENT.md) - Deploy básico com Docker
 
