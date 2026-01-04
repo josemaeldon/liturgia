@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+
+{% block title %}Área Administrativa{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center py-5">
+                    <h1 class="display-4 mb-3">
+                        <i class="bi bi-gear text-primary"></i>
+                        Área Administrativa
+                    </h1>
+                    <p class="lead text-muted mb-0">
+                        Gerencie o conteúdo litúrgico do sistema
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Options -->
+    <div class="row g-4">
+        <!-- Add Liturgy -->
+        <div class="col-md-6 col-lg-4">
+            <a href="{{ url_for('add_liturgy') }}" class="text-decoration-none">
+                <div class="card h-100 admin-card shadow-sm">
+                    <div class="card-body">
+                        <i class="bi bi-plus-circle"></i>
+                        <h5>Adicionar Liturgia</h5>
+                        <p class="text-muted small">
+                            Adicione novas liturgias ao calendário litúrgico
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Edit Liturgy -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 admin-card shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-pencil"></i>
+                    <h5>Editar Liturgia</h5>
+                    <p class="text-muted small">
+                        Edite liturgias existentes no sistema
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manage Readings -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 admin-card shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-book"></i>
+                    <h5>Gerenciar Leituras</h5>
+                    <p class="text-muted small">
+                        Adicione e edite leituras bíblicas
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manage Psalms -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 admin-card shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-music-note-beamed"></i>
+                    <h5>Gerenciar Salmos</h5>
+                    <p class="text-muted small">
+                        Adicione salmos responsoriais
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manage Prayers -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 admin-card shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-chat-heart"></i>
+                    <h5>Gerenciar Orações</h5>
+                    <p class="text-muted small">
+                        Adicione e edite orações litúrgicas
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calendar Management -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 admin-card shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-calendar3"></i>
+                    <h5>Calendário Litúrgico</h5>
+                    <p class="text-muted small">
+                        Configure o calendário do ano litúrgico
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Liturgy Hours -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 admin-card shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-clock-history"></i>
+                    <h5>Liturgia das Horas</h5>
+                    <p class="text-muted small">
+                        Gerencie as horas canônicas
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mass Parts -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 admin-card shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-list-check"></i>
+                    <h5>Partes da Missa</h5>
+                    <p class="text-muted small">
+                        Configure textos fixos da celebração
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Settings -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 admin-card shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-sliders"></i>
+                    <h5>Configurações</h5>
+                    <p class="text-muted small">
+                        Configure preferências do sistema
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Panel -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card bg-light border-0">
+                <div class="card-body">
+                    <h5 class="mb-3">
+                        <i class="bi bi-info-circle text-primary me-2"></i>
+                        Informações do Sistema
+                    </h5>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-calendar-check display-6 text-primary me-3"></i>
+                                <div>
+                                    <h6 class="mb-0">Liturgias Cadastradas</h6>
+                                    <p class="text-muted small mb-0">Sistema em desenvolvimento</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-book display-6 text-success me-3"></i>
+                                <div>
+                                    <h6 class="mb-0">Leituras Disponíveis</h6>
+                                    <p class="text-muted small mb-0">Sistema em desenvolvimento</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-file-earmark-pdf display-6 text-danger me-3"></i>
+                                <div>
+                                    <h6 class="mb-0">PDFs Gerados</h6>
+                                    <p class="text-muted small mb-0">Sistema em desenvolvimento</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

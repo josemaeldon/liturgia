@@ -1,0 +1,251 @@
+{% extends "base.html" %}
+
+{% block title %}Liturgia Diária - {{ liturgy.celebration.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center py-5">
+                    <h1 class="display-4 mb-3">
+                        <i class="bi bi-calendar-check text-primary"></i>
+                        Liturgia Diária
+                    </h1>
+                    <p class="lead text-muted mb-0">
+                        Acompanhe as leituras e orações seguindo o Missal Romano
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Date Navigation -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="date-navigation">
+                <a href="{{ url_for('daily_liturgy', date_str=prev_date) }}" 
+                   class="btn date-nav-btn">
+                    <i class="bi bi-chevron-left"></i> Dia Anterior
+                </a>
+                
+                <div class="text-center">
+                    <div class="date-display">
+                        {{ liturgy.celebration.date.strftime('%d/%m/%Y') }}
+                    </div>
+                    <div class="text-muted small">
+                        {{ liturgy.celebration.date.strftime('%A') }}
+                    </div>
+                </div>
+                
+                <div class="d-flex gap-2">
+                    {% if current_date != today %}
+                    <a href="{{ url_for('daily_liturgy', date_str=today) }}" 
+                       class="btn btn-primary">
+                        <i class="bi bi-calendar-day"></i> Hoje
+                    </a>
+                    {% endif %}
+                    <a href="{{ url_for('daily_liturgy', date_str=next_date) }}" 
+                       class="btn date-nav-btn">
+                        Próximo Dia <i class="bi bi-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Celebration Info -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                        <div>
+                            <h2 class="h3 mb-2" id="celebration-name">
+                                {{ liturgy.celebration.name }}
+                            </h2>
+                            <div class="text-muted">
+                                <i class="bi bi-hourglass-split me-2"></i>
+                                {{ liturgy.celebration.season }}
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="mb-2">
+                                <span class="liturgical-color {{ liturgy.celebration.color.value }}"></span>
+                                <span class="color-badge {{ liturgy.celebration.color.value }}" id="liturgical-color">
+                                    {{ liturgy.celebration.color.value }}
+                                </span>
+                            </div>
+                            <div class="btn-group">
+                                <button class="btn btn-outline-secondary btn-sm" 
+                                        onclick="printPage()" 
+                                        data-bs-toggle="tooltip" 
+                                        title="Imprimir">
+                                    <i class="bi bi-printer"></i>
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm" 
+                                        onclick="exportAsText()" 
+                                        data-bs-toggle="tooltip" 
+                                        title="Exportar como texto">
+                                    <i class="bi bi-file-text"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Collect Prayer -->
+    {% if liturgy.collect_prayer %}
+    <div class="row mb-4 fade-in">
+        <div class="col-12">
+            <div class="reading-section">
+                <div class="reading-title">
+                    <i class="bi bi-stars"></i>
+                    Oração do Dia (Coleta)
+                </div>
+                <div class="reading-text">
+                    {{ liturgy.collect_prayer.text }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- First Reading -->
+    {% if liturgy.first_reading %}
+    <div class="row mb-4 fade-in">
+        <div class="col-12">
+            <div class="reading-section">
+                <div class="reading-title">
+                    <i class="bi bi-book"></i>
+                    Primeira Leitura
+                </div>
+                <div class="reading-reference" id="reading-first">
+                    {{ liturgy.first_reading.reference }}
+                </div>
+                {% if liturgy.first_reading.text %}
+                <div class="reading-text">
+                    {{ liturgy.first_reading.text }}
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle me-2"></i>
+                    Consulte a leitura completa em seu Missal ou Lecionário.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Responsorial Psalm -->
+    {% if liturgy.psalm %}
+    <div class="row mb-4 fade-in">
+        <div class="col-12">
+            <div class="reading-section" style="border-left-color: #2dce89;">
+                <div class="reading-title" style="color: #2dce89;">
+                    <i class="bi bi-music-note-beamed"></i>
+                    Salmo Responsorial
+                </div>
+                <div class="reading-reference" id="reading-psalm">
+                    {{ liturgy.psalm.number }}
+                </div>
+                {% if liturgy.psalm.response %}
+                <div class="alert alert-success mb-3">
+                    <strong>Refrão:</strong> {{ liturgy.psalm.response }}
+                </div>
+                {% endif %}
+                {% if liturgy.psalm.verses %}
+                <div class="reading-text">
+                    {{ liturgy.psalm.verses }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Second Reading -->
+    {% if liturgy.second_reading %}
+    <div class="row mb-4 fade-in">
+        <div class="col-12">
+            <div class="reading-section">
+                <div class="reading-title">
+                    <i class="bi bi-book"></i>
+                    Segunda Leitura
+                </div>
+                <div class="reading-reference" id="reading-second">
+                    {{ liturgy.second_reading.reference }}
+                </div>
+                {% if liturgy.second_reading.text %}
+                <div class="reading-text">
+                    {{ liturgy.second_reading.text }}
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle me-2"></i>
+                    Consulte a leitura completa em seu Missal ou Lecionário.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Gospel -->
+    {% if liturgy.gospel %}
+    <div class="row mb-4 fade-in">
+        <div class="col-12">
+            <div class="reading-section" style="border-left-color: #c41e3a;">
+                <div class="reading-title" style="color: #c41e3a;">
+                    <i class="bi bi-book-half"></i>
+                    Evangelho
+                </div>
+                <div class="reading-reference" id="reading-gospel">
+                    {{ liturgy.gospel.reference }}
+                </div>
+                {% if liturgy.gospel.text %}
+                <div class="reading-text">
+                    {{ liturgy.gospel.text }}
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle me-2"></i>
+                    Consulte o Evangelho completo em seu Missal ou Lecionário.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Actions -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card bg-light border-0">
+                <div class="card-body text-center">
+                    <h5 class="mb-3">Quer personalizar sua celebração?</h5>
+                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                        <a href="{{ url_for('custom_mass') }}" class="btn btn-primary">
+                            <i class="bi bi-pencil-square me-2"></i>
+                            Criar Missa Personalizada
+                        </a>
+                        <a href="{{ url_for('customize_pdf') }}" class="btn btn-outline-primary">
+                            <i class="bi bi-file-earmark-pdf me-2"></i>
+                            Gerar Folheto PDF
+                        </a>
+                        <a href="{{ url_for('liturgy_hours') }}" class="btn btn-outline-secondary">
+                            <i class="bi bi-clock-history me-2"></i>
+                            Ver Liturgia das Horas
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

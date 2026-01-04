@@ -149,6 +149,11 @@ class CustomMass:
         antiphon = Antiphon("Entrada", text, reference)
         self.parts["entrance_antiphon"].content = str(antiphon)
     
+    def set_communion_antiphon(self, text: str, reference: str = ""):
+        """Set the communion antiphon"""
+        antiphon = Antiphon("Comunhão", text, reference)
+        self.parts["communion_antiphon"].content = str(antiphon)
+    
     def set_readings(self, first_reading: str = "", psalm: str = "", 
                     second_reading: str = "", gospel: str = ""):
         """Set the readings for the Mass"""
@@ -204,40 +209,126 @@ class CustomMass:
         with open(filename, 'w', encoding='utf-8') as f:
             f.write(self.get_full_text())
     
-    def export_to_pdf(self, filename: str):
-        """Export the Mass to PDF format"""
+    def export_to_pdf(self, filename: str, **options):
+        """
+        Export the Mass to PDF format with customization options
+        
+        Options:
+            font_family: str - Font family (Times-Roman, Helvetica, Courier)
+            font_size: int - Base font size (default: 12)
+            page_size: str - Page size (A4, Letter, A5)
+            margins: int - Margin size in points (default: 72)
+            title_size: int - Title font size (default: 18)
+            include_header: bool - Include header (default: True)
+            include_footer: bool - Include footer (default: True)
+            liturgical_color: str - Liturgical color for accent (default: verde)
+        """
         try:
-            from reportlab.lib.pagesizes import letter, A4
-            from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+            from reportlab.lib.pagesizes import letter, A4, A5
+            from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak
             from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
             from reportlab.lib.units import inch
+            from reportlab.lib import colors
             
-            doc = SimpleDocTemplate(filename, pagesize=A4)
+            # Get options with defaults
+            font_family = options.get('font_family', 'Times-Roman')
+            font_size = options.get('font_size', 12)
+            page_size_str = options.get('page_size', 'A4')
+            margins = options.get('margins', 72)
+            title_size = options.get('title_size', 18)
+            include_header = options.get('include_header', True)
+            include_footer = options.get('include_footer', True)
+            
+            # Map page size string to actual page size
+            page_sizes = {
+                'A4': A4,
+                'Letter': letter,
+                'A5': A5
+            }
+            page_size = page_sizes.get(page_size_str, A4)
+            
+            # Create document
+            doc = SimpleDocTemplate(
+                filename, 
+                pagesize=page_size,
+                leftMargin=margins,
+                rightMargin=margins,
+                topMargin=margins,
+                bottomMargin=margins
+            )
+            
             styles = getSampleStyleSheet()
             story = []
             
-            # Add title
-            if self.celebration:
-                title_style = ParagraphStyle(
-                    'CustomTitle',
-                    parent=styles['Heading1'],
-                    fontSize=16,
-                    textColor='black',
-                    spaceAfter=30,
-                    alignment=1  # Center
-                )
+            # Custom styles
+            title_style = ParagraphStyle(
+                'CustomTitle',
+                parent=styles['Heading1'],
+                fontName=font_family,
+                fontSize=title_size,
+                textColor=colors.black,
+                spaceAfter=20,
+                alignment=1,  # Center
+                leading=title_size * 1.2
+            )
+            
+            heading_style = ParagraphStyle(
+                'CustomHeading',
+                parent=styles['Heading2'],
+                fontName=font_family,
+                fontSize=font_size + 2,
+                textColor=colors.HexColor('#5e72e4'),
+                spaceAfter=10,
+                spaceBefore=15,
+                leading=(font_size + 2) * 1.3
+            )
+            
+            body_style = ParagraphStyle(
+                'CustomBody',
+                parent=styles['Normal'],
+                fontName=font_family,
+                fontSize=font_size,
+                textColor=colors.black,
+                spaceAfter=6,
+                leading=font_size * 1.4,
+                alignment=0  # Left
+            )
+            
+            # Add header if requested
+            if include_header and self.celebration:
                 story.append(Paragraph(self.celebration.name.upper(), title_style))
-                story.append(Paragraph(f"Data: {self.celebration.date.strftime('%d/%m/%Y')}", styles['Normal']))
-                story.append(Spacer(1, 0.5*inch))
+                info_text = f"Data: {self.celebration.date.strftime('%d/%m/%Y')}"
+                if hasattr(self.celebration, 'color'):
+                    info_text += f" | Cor Litúrgica: {self.celebration.color.value.title()}"
+                story.append(Paragraph(info_text, body_style))
+                story.append(Spacer(1, 0.3*inch))
             
             # Add content
             for part in self._get_sorted_parts():
                 if part.content:
-                    story.append(Paragraph(f"<b>{part.title}</b>", styles['Heading2']))
-                    story.append(Paragraph(part.content.replace('\n', '<br/>'), styles['Normal']))
-                    story.append(Spacer(1, 0.2*inch))
+                    # Add part title
+                    story.append(Paragraph(f"<b>{part.title}</b>", heading_style))
+                    
+                    # Add part content
+                    content = part.content.replace('\n', '<br/>')
+                    story.append(Paragraph(content, body_style))
+                    story.append(Spacer(1, 0.15*inch))
             
+            # Add footer if requested
+            if include_footer:
+                story.append(Spacer(1, 0.5*inch))
+                footer_style = ParagraphStyle(
+                    'Footer',
+                    parent=body_style,
+                    fontSize=font_size - 2,
+                    textColor=colors.grey,
+                    alignment=1
+                )
+                story.append(Paragraph("Folheto de Missa - Liturgia Católica", footer_style))
+            
+            # Build PDF
             doc.build(story)
+            
         except ImportError:
             raise ImportError("reportlab is required for PDF export. Install with: pip install reportlab")
     
