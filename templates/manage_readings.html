@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}Gerenciar Leituras{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <!-- Page Header -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body text-center py-4">
+                    <h1 class="h2 mb-2">
+                        <i class="bi bi-book text-primary"></i>
+                        Gerenciar Leituras Bíblicas
+                    </h1>
+                    <p class="text-muted mb-0">
+                        Adicione e edite leituras bíblicas do sistema
+                    </p>
+                </div>
+            </div>
+
+            <!-- Add Reading Form -->
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h5 class="mb-4">Adicionar/Editar Leitura</h5>
+                    <form method="POST" action="{{ url_for('manage_readings') }}" class="needs-validation" novalidate>
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label for="reading_type" class="form-label">Tipo de Leitura *</label>
+                                <select class="form-select" id="reading_type" name="reading_type" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="primeira">Primeira Leitura</option>
+                                    <option value="segunda">Segunda Leitura</option>
+                                    <option value="evangelho">Evangelho</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+                                <label for="reading_reference" class="form-label">Referência *</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="reading_reference" 
+                                       name="reading_reference" 
+                                       placeholder="Ex: Gn 1,1-5"
+                                       required>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="reading_text" class="form-label">Texto da Leitura *</label>
+                            <textarea class="form-control" 
+                                      id="reading_text" 
+                                      name="reading_text" 
+                                      rows="10"
+                                      placeholder="Digite o texto completo da leitura bíblica..."
+                                      required></textarea>
+                            <div class="form-text">Cole o texto completo da leitura bíblica</div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="reading_notes" class="form-label">Notas (Opcional)</label>
+                            <textarea class="form-control" 
+                                      id="reading_notes" 
+                                      name="reading_notes" 
+                                      rows="3"
+                                      placeholder="Notas ou comentários sobre a leitura..."></textarea>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{{ url_for('admin') }}" class="btn btn-outline-secondary">
+                                <i class="bi bi-x-circle me-2"></i>
+                                Voltar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle me-2"></i>
+                                Salvar Leitura
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- List of Readings -->
+            <div class="card shadow-sm mt-4">
+                <div class="card-body">
+                    <h5 class="mb-3">Leituras Cadastradas</h5>
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle me-2"></i>
+                        Sistema de listagem de leituras em desenvolvimento
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

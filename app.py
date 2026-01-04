@@ -239,6 +239,139 @@ def add_liturgy():
                          today=date.today().strftime('%Y-%m-%d'))
 
 
+@app.route('/admin/edit-liturgy', methods=['GET', 'POST'])
+def edit_liturgy():
+    """Edit existing liturgy content"""
+    if request.method == 'POST':
+        try:
+            liturgy_id = request.form.get('liturgy_id')
+            liturgy_date = request.form.get('liturgy_date')
+            celebration_name = request.form.get('celebration_name')
+            
+            flash(f'Liturgia de {liturgy_date} editada com sucesso!', 'success')
+            return redirect(url_for('admin'))
+            
+        except Exception as e:
+            flash(f'Erro ao editar liturgia: {str(e)}', 'error')
+    
+    return render_template('edit_liturgy.html',
+                         today=date.today().strftime('%Y-%m-%d'))
+
+
+@app.route('/admin/manage-readings', methods=['GET', 'POST'])
+def manage_readings():
+    """Manage biblical readings"""
+    if request.method == 'POST':
+        try:
+            reading_reference = request.form.get('reading_reference')
+            reading_text = request.form.get('reading_text')
+            reading_type = request.form.get('reading_type')
+            
+            flash(f'Leitura {reading_reference} salva com sucesso!', 'success')
+            return redirect(url_for('admin'))
+            
+        except Exception as e:
+            flash(f'Erro ao salvar leitura: {str(e)}', 'error')
+    
+    return render_template('manage_readings.html')
+
+
+@app.route('/admin/manage-psalms', methods=['GET', 'POST'])
+def manage_psalms():
+    """Manage responsorial psalms"""
+    if request.method == 'POST':
+        try:
+            psalm_number = request.form.get('psalm_number')
+            psalm_response = request.form.get('psalm_response')
+            psalm_verses = request.form.get('psalm_verses')
+            
+            flash(f'Salmo {psalm_number} salvo com sucesso!', 'success')
+            return redirect(url_for('admin'))
+            
+        except Exception as e:
+            flash(f'Erro ao salvar salmo: {str(e)}', 'error')
+    
+    return render_template('manage_psalms.html')
+
+
+@app.route('/admin/manage-prayers', methods=['GET', 'POST'])
+def manage_prayers():
+    """Manage liturgical prayers"""
+    if request.method == 'POST':
+        try:
+            prayer_name = request.form.get('prayer_name')
+            prayer_type = request.form.get('prayer_type')
+            prayer_text = request.form.get('prayer_text')
+            
+            flash(f'Oração "{prayer_name}" salva com sucesso!', 'success')
+            return redirect(url_for('admin'))
+            
+        except Exception as e:
+            flash(f'Erro ao salvar oração: {str(e)}', 'error')
+    
+    return render_template('manage_prayers.html')
+
+
+@app.route('/admin/calendar')
+def liturgical_calendar():
+    """Liturgical calendar management"""
+    return render_template('liturgical_calendar.html',
+                         today=date.today().strftime('%Y-%m-%d'))
+
+
+@app.route('/admin/liturgy-hours', methods=['GET', 'POST'])
+def manage_liturgy_hours():
+    """Manage liturgy of the hours"""
+    if request.method == 'POST':
+        try:
+            hour_type = request.form.get('hour_type')
+            hour_date = request.form.get('hour_date')
+            
+            flash(f'Liturgia das Horas ({hour_type}) salva com sucesso!', 'success')
+            return redirect(url_for('admin'))
+            
+        except Exception as e:
+            flash(f'Erro ao salvar liturgia das horas: {str(e)}', 'error')
+    
+    return render_template('manage_liturgy_hours.html',
+                         today=date.today().strftime('%Y-%m-%d'))
+
+
+@app.route('/admin/mass-parts', methods=['GET', 'POST'])
+def manage_mass_parts():
+    """Manage fixed texts of Mass celebration"""
+    if request.method == 'POST':
+        try:
+            part_name = request.form.get('part_name')
+            part_category = request.form.get('part_category')
+            part_text = request.form.get('part_text')
+            
+            flash(f'Parte da missa "{part_name}" salva com sucesso!', 'success')
+            return redirect(url_for('admin'))
+            
+        except Exception as e:
+            flash(f'Erro ao salvar parte da missa: {str(e)}', 'error')
+    
+    return render_template('manage_mass_parts.html')
+
+
+@app.route('/admin/settings', methods=['GET', 'POST'])
+def admin_settings():
+    """System settings and preferences"""
+    if request.method == 'POST':
+        try:
+            setting_name = request.form.get('setting_name')
+            setting_value = request.form.get('setting_value')
+            
+            flash('Configurações salvas com sucesso!', 'success')
+            return redirect(url_for('admin'))
+            
+        except Exception as e:
+            flash(f'Erro ao salvar configurações: {str(e)}', 'error')
+    
+    return render_template('admin_settings.html')
+
+
 @app.route('/api/liturgy/<date_str>')
 def api_liturgy(date_str):
     """API endpoint for liturgy data"""

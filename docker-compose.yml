@@ -1,0 +1,57 @@
+# Docker Compose / Docker Swarm Stack file for Liturgia System
+version: '3.8'
+
+services:
+  liturgia:
+    image: ghcr.io/josemaeldon/liturgia:latest
+    ports:
+      - "8001:8001"
+    environment:
+      - SECRET_KEY=${SECRET_KEY:-change-this-secret-key-in-production}
+      - FLASK_ENV=production
+      - UPLOAD_FOLDER=/tmp/liturgia_pdfs
+    volumes:
+      - liturgia-pdfs:/tmp/liturgia_pdfs
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      update_config:
+        parallelism: 1
+        delay: 10s
+        failure_action: rollback
+        order: start-first
+      rollback_config:
+        parallelism: 1
+        delay: 10s
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.liturgia.rule=Host(`liturgia.example.com`)"
+        - "traefik.http.services.liturgia.loadbalancer.server.port=8001"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8001/', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - liturgia-network
+
+volumes:
+  liturgia-pdfs:
+    driver: local
+
+networks:
+  liturgia-network:
+    driver: overlay
+    attachable: true

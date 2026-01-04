@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}Gerenciar Orações{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <!-- Page Header -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body text-center py-4">
+                    <h1 class="h2 mb-2">
+                        <i class="bi bi-chat-heart text-primary"></i>
+                        Gerenciar Orações Litúrgicas
+                    </h1>
+                    <p class="text-muted mb-0">
+                        Adicione e edite orações litúrgicas do sistema
+                    </p>
+                </div>
+            </div>
+
+            <!-- Add Prayer Form -->
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h5 class="mb-4">Adicionar/Editar Oração</h5>
+                    <form method="POST" action="{{ url_for('manage_prayers') }}" class="needs-validation" novalidate>
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label for="prayer_name" class="form-label">Nome da Oração *</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="prayer_name" 
+                                       name="prayer_name" 
+                                       placeholder="Ex: Oração Eucarística I"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+                                <label for="prayer_type" class="form-label">Tipo de Oração *</label>
+                                <select class="form-select" id="prayer_type" name="prayer_type" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="coleta">Oração da Coleta</option>
+                                    <option value="sobre_oferendas">Oração sobre as Oferendas</option>
+                                    <option value="eucaristica">Oração Eucarística</option>
+                                    <option value="comunhao">Oração da Comunhão</option>
+                                    <option value="pos_comunhao">Oração Pós-Comunhão</option>
+                                    <option value="benedicao">Bênção Final</option>
+                                    <option value="outras">Outras</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="prayer_text" class="form-label">Texto da Oração *</label>
+                            <textarea class="form-control" 
+                                      id="prayer_text" 
+                                      name="prayer_text" 
+                                      rows="10"
+                                      placeholder="Digite o texto completo da oração..."
+                                      required></textarea>
+                            <div class="form-text">Digite ou cole o texto completo da oração litúrgica</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label for="prayer_season" class="form-label">Tempo Litúrgico (Opcional)</label>
+                                <select class="form-select" id="prayer_season" name="prayer_season">
+                                    <option value="">Todos</option>
+                                    <option value="Advento">Advento</option>
+                                    <option value="Tempo do Natal">Tempo do Natal</option>
+                                    <option value="Quaresma">Quaresma</option>
+                                    <option value="Tríduo Pascal">Tríduo Pascal</option>
+                                    <option value="Tempo Pascal">Tempo Pascal</option>
+                                    <option value="Tempo Comum">Tempo Comum</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+                                <label for="prayer_notes" class="form-label">Notas (Opcional)</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="prayer_notes" 
+                                       name="prayer_notes" 
+                                       placeholder="Observações sobre a oração">
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{{ url_for('admin') }}" class="btn btn-outline-secondary">
+                                <i class="bi bi-x-circle me-2"></i>
+                                Voltar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle me-2"></i>
+                                Salvar Oração
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- List of Prayers -->
+            <div class="card shadow-sm mt-4">
+                <div class="card-body">
+                    <h5 class="mb-3">Orações Cadastradas</h5>
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle me-2"></i>
+                        Sistema de listagem de orações em desenvolvimento
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

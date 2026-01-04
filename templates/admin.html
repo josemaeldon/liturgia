@@ -40,106 +40,122 @@
 
         <!-- Edit Liturgy -->
         <div class="col-md-6 col-lg-4">
-            <div class="card h-100 admin-card shadow-sm">
-                <div class="card-body">
-                    <i class="bi bi-pencil"></i>
-                    <h5>Editar Liturgia</h5>
-                    <p class="text-muted small">
-                        Edite liturgias existentes no sistema
-                    </p>
+            <a href="{{ url_for('edit_liturgy') }}" class="text-decoration-none">
+                <div class="card h-100 admin-card shadow-sm">
+                    <div class="card-body">
+                        <i class="bi bi-pencil"></i>
+                        <h5>Editar Liturgia</h5>
+                        <p class="text-muted small">
+                            Edite liturgias existentes no sistema
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
 
         <!-- Manage Readings -->
         <div class="col-md-6 col-lg-4">
-            <div class="card h-100 admin-card shadow-sm">
-                <div class="card-body">
-                    <i class="bi bi-book"></i>
-                    <h5>Gerenciar Leituras</h5>
-                    <p class="text-muted small">
-                        Adicione e edite leituras bíblicas
-                    </p>
+            <a href="{{ url_for('manage_readings') }}" class="text-decoration-none">
+                <div class="card h-100 admin-card shadow-sm">
+                    <div class="card-body">
+                        <i class="bi bi-book"></i>
+                        <h5>Gerenciar Leituras</h5>
+                        <p class="text-muted small">
+                            Adicione e edite leituras bíblicas
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
 
         <!-- Manage Psalms -->
         <div class="col-md-6 col-lg-4">
-            <div class="card h-100 admin-card shadow-sm">
-                <div class="card-body">
-                    <i class="bi bi-music-note-beamed"></i>
-                    <h5>Gerenciar Salmos</h5>
-                    <p class="text-muted small">
-                        Adicione salmos responsoriais
-                    </p>
+            <a href="{{ url_for('manage_psalms') }}" class="text-decoration-none">
+                <div class="card h-100 admin-card shadow-sm">
+                    <div class="card-body">
+                        <i class="bi bi-music-note-beamed"></i>
+                        <h5>Gerenciar Salmos</h5>
+                        <p class="text-muted small">
+                            Adicione salmos responsoriais
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
 
         <!-- Manage Prayers -->
         <div class="col-md-6 col-lg-4">
-            <div class="card h-100 admin-card shadow-sm">
-                <div class="card-body">
-                    <i class="bi bi-chat-heart"></i>
-                    <h5>Gerenciar Orações</h5>
-                    <p class="text-muted small">
-                        Adicione e edite orações litúrgicas
-                    </p>
+            <a href="{{ url_for('manage_prayers') }}" class="text-decoration-none">
+                <div class="card h-100 admin-card shadow-sm">
+                    <div class="card-body">
+                        <i class="bi bi-chat-heart"></i>
+                        <h5>Gerenciar Orações</h5>
+                        <p class="text-muted small">
+                            Adicione e edite orações litúrgicas
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
 
         <!-- Calendar Management -->
         <div class="col-md-6 col-lg-4">
-            <div class="card h-100 admin-card shadow-sm">
-                <div class="card-body">
-                    <i class="bi bi-calendar3"></i>
-                    <h5>Calendário Litúrgico</h5>
-                    <p class="text-muted small">
-                        Configure o calendário do ano litúrgico
-                    </p>
+            <a href="{{ url_for('liturgical_calendar') }}" class="text-decoration-none">
+                <div class="card h-100 admin-card shadow-sm">
+                    <div class="card-body">
+                        <i class="bi bi-calendar3"></i>
+                        <h5>Calendário Litúrgico</h5>
+                        <p class="text-muted small">
+                            Configure o calendário do ano litúrgico
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
 
         <!-- Liturgy Hours -->
         <div class="col-md-6 col-lg-4">
-            <div class="card h-100 admin-card shadow-sm">
-                <div class="card-body">
-                    <i class="bi bi-clock-history"></i>
-                    <h5>Liturgia das Horas</h5>
-                    <p class="text-muted small">
-                        Gerencie as horas canônicas
-                    </p>
+            <a href="{{ url_for('manage_liturgy_hours') }}" class="text-decoration-none">
+                <div class="card h-100 admin-card shadow-sm">
+                    <div class="card-body">
+                        <i class="bi bi-clock-history"></i>
+                        <h5>Liturgia das Horas</h5>
+                        <p class="text-muted small">
+                            Gerencie as horas canônicas
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
 
         <!-- Mass Parts -->
         <div class="col-md-6 col-lg-4">
-            <div class="card h-100 admin-card shadow-sm">
-                <div class="card-body">
-                    <i class="bi bi-list-check"></i>
-                    <h5>Partes da Missa</h5>
-                    <p class="text-muted small">
-                        Configure textos fixos da celebração
-                    </p>
+            <a href="{{ url_for('manage_mass_parts') }}" class="text-decoration-none">
+                <div class="card h-100 admin-card shadow-sm">
+                    <div class="card-body">
+                        <i class="bi bi-list-check"></i>
+                        <h5>Partes da Missa</h5>
+                        <p class="text-muted small">
+                            Configure textos fixos da celebração
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
 
         <!-- System Settings -->
         <div class="col-md-6 col-lg-4">
-            <div class="card h-100 admin-card shadow-sm">
-                <div class="card-body">
-                    <i class="bi bi-sliders"></i>
-                    <h5>Configurações</h5>
-                    <p class="text-muted small">
-                        Configure preferências do sistema
-                    </p>
+            <a href="{{ url_for('admin_settings') }}" class="text-decoration-none">
+                <div class="card h-100 admin-card shadow-sm">
+                    <div class="card-body">
+                        <i class="bi bi-sliders"></i>
+                        <h5>Configurações</h5>
+                        <p class="text-muted small">
+                            Configure preferências do sistema
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 
