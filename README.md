@@ -8,12 +8,17 @@ Sistema completo para gerenciamento e personalização de liturgias católicas, 
 ## Características
 
 - **Liturgia Diária**: Acesso às leituras e orações do dia
-- **Liturgia das Horas**: Estrutura completa das horas canônicas (Ofício das Leituras, Laudes, Hora Média, Vésperas, Completas)
-- **Personalização de Missas**: Crie e personalize missas completas com todas as partes:
-  - Ritos Iniciais (Entrada, Saudação, Ato Penitencial, Kyrie, Glória)
-  - Liturgia da Palavra (Leituras, Salmo Responsorial, Evangelho, Homilia, Credo, Oração dos Fiéis)
-  - Liturgia Eucarística (Ofertório, Oração Eucarística, Pai Nosso, Comunhão)
-  - Ritos Finais (Bênção, Despedida)
+- **Liturgia das Horas Completa**: Todas as 7 horas canônicas
+  - Ofício das Leituras (Matutino)
+  - Laudes (Oração da Manhã)
+  - Hora Média: Terça (9h), Sexta (12h), Nona (15h)
+  - Vésperas (Oração da Tarde)
+  - Completas (Oração da Noite)
+- **Personalização Completa de Missas**: 77 partes personalizáveis cobrindo toda a estrutura da Missa:
+  - Ritos Iniciais (12 partes)
+  - Liturgia da Palavra (14 partes)
+  - Liturgia Eucarística (43 partes - incluindo preparação, oração eucarística e comunhão)
+  - Ritos Finais (8 partes)
 
 ## 🚀 Início Rápido
 
@@ -29,9 +34,12 @@ pip install -r requirements.txt
 python demo.py
 
 # 4. Ou execute os exemplos
-python examples/example_epifania.py
-python examples/example_daily_liturgy.py
-python examples/example_liturgy_hours.py
+python examples/example_epifania.py          # Missa completa da Epifania
+python examples/example_daily_liturgy.py      # Liturgia diária
+python examples/example_liturgy_hours.py      # Algumas horas canônicas
+python examples/example_all_hours.py          # TODAS as 7 horas canônicas
+python examples/example_all_mass_parts.py     # Lista de todas as 77 partes da Missa
+python examples/example_custom_mass.py        # Criar missa personalizada
 ```
 
 ## Estrutura do Projeto
@@ -62,9 +70,22 @@ print(liturgy.get_full_text())
 ```python
 from liturgia import LiturgiaHoras
 
-# Obter Laudes do dia
+# Obter uma hora específica
 laudes = LiturgiaHoras.get_laudes("2026-01-06")
 print(laudes.format())
+
+# Obter hora média (Terça, Sexta ou Nona)
+terca = LiturgiaHoras.get_terca("2026-01-06")
+sexta = LiturgiaHoras.get_sexta("2026-01-06")
+nona = LiturgiaHoras.get_nona("2026-01-06")
+
+# Obter todas as 7 horas canônicas de uma vez
+all_hours = LiturgiaHoras.get_all_hours("2026-01-06")
+# Retorna: {'office_readings', 'laudes', 'terca', 'sexta', 'nona', 'vesperas', 'completas'}
+
+# Ou obter texto formatado de todas as horas
+complete_text = LiturgiaHoras.format_all_hours("2026-01-06")
+print(complete_text)
 ```
 
 ### Personalização de Missa
@@ -106,9 +127,12 @@ pip install -r requirements.txt
 ## Exemplos
 
 Veja a pasta `examples/` para exemplos completos de liturgias, incluindo:
-- Exemplo de Solenidade da Epifania (similar ao PDF de referência)
-- Liturgias dominicais
-- Liturgia das Horas completa
+- **example_epifania.py** - Missa completa da Solenidade da Epifania (similar ao PDF de referência)
+- **example_daily_liturgy.py** - Como usar a liturgia diária
+- **example_liturgy_hours.py** - Exemplos de horas canônicas
+- **example_all_hours.py** - TODAS as 7 horas canônicas completas
+- **example_all_mass_parts.py** - Lista e explicação de todas as 77 partes da Missa
+- **example_custom_mass.py** - Como criar missas personalizadas
 
 ## Contribuindo
 

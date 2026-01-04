@@ -36,42 +36,96 @@ class CustomMass:
         self._init_default_structure()
     
     def _init_default_structure(self):
-        """Initialize with default Mass structure"""
+        """Initialize with complete Mass structure including all possible parts"""
         # Ritos Iniciais
-        self.parts["entrance"] = MassPart("Canto de Entrada", "", 1)
-        self.parts["greeting"] = MassPart("Saudação", "Em nome do Pai, do Filho e do Espírito Santo.", 2)
-        self.parts["penitential"] = MassPart("Ato Penitencial", "", 3)
-        self.parts["kyrie"] = MassPart("Kyrie", "Senhor, tende piedade de nós.", 4)
-        self.parts["gloria"] = MassPart("Glória", "", 5)
-        self.parts["collect"] = MassPart("Oração do Dia (Coleta)", "", 6)
+        self.parts["entrance_procession"] = MassPart("Procissão de Entrada", "", 1)
+        self.parts["entrance_antiphon"] = MassPart("Antífona de Entrada", "", 2)
+        self.parts["entrance_hymn"] = MassPart("Canto de Entrada", "", 3)
+        self.parts["sign_cross"] = MassPart("Sinal da Cruz", "", 4)
+        self.parts["greeting"] = MassPart("Saudação", "Em nome do Pai, do Filho e do Espírito Santo.", 5)
+        self.parts["introduction"] = MassPart("Introdução à Celebração", "", 6)
+        self.parts["blessing_water"] = MassPart("Bênção e Aspersão da Água (opcional)", "", 7)
+        self.parts["penitential_intro"] = MassPart("Introdução ao Ato Penitencial", "", 8)
+        self.parts["penitential"] = MassPart("Ato Penitencial", "", 9)
+        self.parts["kyrie"] = MassPart("Kyrie", "Senhor, tende piedade de nós.", 10)
+        self.parts["gloria"] = MassPart("Glória", "", 11)
+        self.parts["collect"] = MassPart("Oração do Dia (Coleta)", "", 12)
         
         # Liturgia da Palavra
-        self.parts["first_reading"] = MassPart("Primeira Leitura", "", 7)
-        self.parts["psalm"] = MassPart("Salmo Responsorial", "", 8)
-        self.parts["second_reading"] = MassPart("Segunda Leitura", "", 9)
-        self.parts["gospel_acclamation"] = MassPart("Aclamação ao Evangelho", "", 10)
-        self.parts["gospel"] = MassPart("Evangelho", "", 11)
-        self.parts["homily"] = MassPart("Homilia", "", 12)
-        self.parts["creed"] = MassPart("Profissão de Fé (Credo)", "", 13)
-        self.parts["prayers_faithful"] = MassPart("Oração dos Fiéis", "", 14)
+        self.parts["first_reading"] = MassPart("Primeira Leitura", "", 13)
+        self.parts["responsorial_gradual"] = MassPart("Canto Responsorial/Gradual", "", 14)
+        self.parts["psalm"] = MassPart("Salmo Responsorial", "", 15)
+        self.parts["second_reading"] = MassPart("Segunda Leitura", "", 16)
+        self.parts["sequence"] = MassPart("Sequência (dias especiais)", "", 17)
+        self.parts["gospel_acclamation"] = MassPart("Aclamação ao Evangelho (Aleluia)", "", 18)
+        self.parts["gospel_procession"] = MassPart("Procissão do Evangelho", "", 19)
+        self.parts["gospel"] = MassPart("Evangelho", "", 20)
+        self.parts["homily"] = MassPart("Homilia", "", 21)
+        self.parts["silence_reflection"] = MassPart("Silêncio para Reflexão", "", 22)
+        self.parts["creed"] = MassPart("Profissão de Fé (Credo)", "", 23)
+        self.parts["prayers_faithful_intro"] = MassPart("Introdução à Oração dos Fiéis", "", 24)
+        self.parts["prayers_faithful"] = MassPart("Oração dos Fiéis", "", 25)
+        self.parts["prayers_faithful_conclusion"] = MassPart("Conclusão da Oração dos Fiéis", "", 26)
         
         # Liturgia Eucarística
-        self.parts["offertory"] = MassPart("Apresentação das Oferendas", "", 15)
-        self.parts["prayer_offerings"] = MassPart("Oração sobre as Oferendas", "", 16)
-        self.parts["preface"] = MassPart("Prefácio", "", 17)
-        self.parts["sanctus"] = MassPart("Santo", "", 18)
-        self.parts["eucharistic_prayer"] = MassPart("Oração Eucarística", "", 19)
-        self.parts["our_father"] = MassPart("Pai Nosso", "", 20)
-        self.parts["peace"] = MassPart("Rito da Paz", "", 21)
-        self.parts["agnus_dei"] = MassPart("Cordeiro de Deus", "", 22)
-        self.parts["communion"] = MassPart("Comunhão", "", 23)
-        self.parts["communion_antiphon"] = MassPart("Antífona da Comunhão", "", 24)
-        self.parts["prayer_communion"] = MassPart("Oração depois da Comunhão", "", 25)
+        # Preparação das Oferendas
+        self.parts["offertory_procession"] = MassPart("Procissão das Oferendas", "", 27)
+        self.parts["offertory_hymn"] = MassPart("Canto das Oferendas", "", 28)
+        self.parts["offertory"] = MassPart("Apresentação das Oferendas", "", 29)
+        self.parts["preparation_bread"] = MassPart("Preparação do Pão", "", 30)
+        self.parts["preparation_wine"] = MassPart("Preparação do Vinho", "", 31)
+        self.parts["mixing_water_wine"] = MassPart("Mistura da Água com o Vinho", "", 32)
+        self.parts["offering_incense"] = MassPart("Incensação das Oferendas (opcional)", "", 33)
+        self.parts["washing_hands"] = MassPart("Lavabo (Lavagem das Mãos)", "", 34)
+        self.parts["invitation_prayer"] = MassPart("Convite à Oração", "", 35)
+        self.parts["prayer_offerings"] = MassPart("Oração sobre as Oferendas", "", 36)
+        
+        # Oração Eucarística
+        self.parts["preface_dialogue"] = MassPart("Diálogo do Prefácio", "", 37)
+        self.parts["preface"] = MassPart("Prefácio", "", 38)
+        self.parts["sanctus"] = MassPart("Santo", "", 39)
+        self.parts["epiclesis_1"] = MassPart("Primeira Epiclese (invocação do Espírito Santo)", "", 40)
+        self.parts["institution_narrative"] = MassPart("Narrativa da Instituição", "", 41)
+        self.parts["consecration_bread"] = MassPart("Consagração do Pão", "", 42)
+        self.parts["consecration_wine"] = MassPart("Consagração do Vinho", "", 43)
+        self.parts["elevation"] = MassPart("Elevação", "", 44)
+        self.parts["mystery_faith"] = MassPart("Mistério da Fé (Aclamação)", "", 45)
+        self.parts["anamnesis"] = MassPart("Anamnese (Memorial)", "", 46)
+        self.parts["epiclesis_2"] = MassPart("Segunda Epiclese", "", 47)
+        self.parts["intercessions"] = MassPart("Intercessões", "", 48)
+        self.parts["doxology"] = MassPart("Doxologia Final", "", 49)
+        self.parts["great_amen"] = MassPart("Grande Amém", "", 50)
+        
+        # Rito da Comunhão
+        self.parts["our_father_intro"] = MassPart("Introdução ao Pai Nosso", "", 51)
+        self.parts["our_father"] = MassPart("Pai Nosso", "", 52)
+        self.parts["embolism"] = MassPart("Embolismo (Livrai-nos de todos os males)", "", 53)
+        self.parts["doxology_prayer"] = MassPart("Doxologia do Povo", "", 54)
+        self.parts["peace_prayer"] = MassPart("Oração pela Paz", "", 55)
+        self.parts["peace"] = MassPart("Rito da Paz", "", 56)
+        self.parts["peace_exchange"] = MassPart("Saudação da Paz", "", 57)
+        self.parts["fraction"] = MassPart("Fração do Pão", "", 58)
+        self.parts["agnus_dei"] = MassPart("Cordeiro de Deus", "", 59)
+        self.parts["commingling"] = MassPart("Imissão (mistura do pão e vinho)", "", 60)
+        self.parts["private_preparation"] = MassPart("Oração Privada do Sacerdote", "", 61)
+        self.parts["invitation_communion"] = MassPart("Convite à Comunhão", "", 62)
+        self.parts["communion"] = MassPart("Comunhão", "", 63)
+        self.parts["communion_antiphon"] = MassPart("Antífona da Comunhão", "", 64)
+        self.parts["communion_hymn"] = MassPart("Canto de Comunhão", "", 65)
+        self.parts["communion_meditation"] = MassPart("Momento de Ação de Graças", "", 66)
+        self.parts["purification"] = MassPart("Purificação dos Vasos Sagrados", "", 67)
+        self.parts["silence_thanksgiving"] = MassPart("Silêncio para Ação de Graças", "", 68)
+        self.parts["prayer_communion"] = MassPart("Oração depois da Comunhão", "", 69)
         
         # Ritos Finais
-        self.parts["announcements"] = MassPart("Avisos", "", 26)
-        self.parts["blessing"] = MassPart("Bênção", "", 27)
-        self.parts["dismissal"] = MassPart("Despedida", "", 28)
+        self.parts["greeting_final"] = MassPart("Saudação Final", "", 70)
+        self.parts["announcements"] = MassPart("Avisos", "", 71)
+        self.parts["blessing_introduction"] = MassPart("Introdução à Bênção", "", 72)
+        self.parts["solemn_blessing"] = MassPart("Bênção Solene (opcional)", "", 73)
+        self.parts["blessing"] = MassPart("Bênção", "", 74)
+        self.parts["dismissal"] = MassPart("Despedida", "", 75)
+        self.parts["recession"] = MassPart("Procissão de Saída", "", 76)
+        self.parts["final_hymn"] = MassPart("Canto Final", "", 77)
     
     def set_celebration(self, name: str, date_str: Optional[str] = None, 
                        celebration_type: str = "solenidade",
@@ -114,8 +168,18 @@ class CustomMass:
     
     def add_custom_prayer(self, title: str, text: str, position: int = 14):
         """Add a custom prayer at a specific position"""
-        key = title.lower().replace(" ", "_")
+        # Generate a unique key by appending a counter if needed
+        base_key = title.lower().replace(" ", "_")
+        key = base_key
+        counter = 1
+        while key in self.parts:
+            key = f"{base_key}_{counter}"
+            counter += 1
         self.parts[key] = MassPart(title, text, position)
+    
+    def _get_sorted_parts(self):
+        """Get parts sorted by order"""
+        return sorted(self.parts.values(), key=lambda x: x.order)
     
     def get_full_text(self) -> str:
         """Get the complete formatted text of the Mass"""
@@ -128,10 +192,8 @@ class CustomMass:
             result.append(f"Cor Litúrgica: {self.celebration.color}")
             result.append(f"{'=' * 80}\n")
         
-        # Sort parts by order
-        sorted_parts = sorted(self.parts.values(), key=lambda x: x.order)
-        
-        for part in sorted_parts:
+        # Use helper method to get sorted parts
+        for part in self._get_sorted_parts():
             if part.content:  # Only include parts with content
                 result.append(str(part))
         
@@ -169,8 +231,7 @@ class CustomMass:
                 story.append(Spacer(1, 0.5*inch))
             
             # Add content
-            sorted_parts = sorted(self.parts.values(), key=lambda x: x.order)
-            for part in sorted_parts:
+            for part in self._get_sorted_parts():
                 if part.content:
                     story.append(Paragraph(f"<b>{part.title}</b>", styles['Heading2']))
                     story.append(Paragraph(part.content.replace('\n', '<br/>'), styles['Normal']))
@@ -198,8 +259,7 @@ class CustomMass:
                 doc.add_paragraph()
             
             # Add content
-            sorted_parts = sorted(self.parts.values(), key=lambda x: x.order)
-            for part in sorted_parts:
+            for part in self._get_sorted_parts():
                 if part.content:
                     doc.add_heading(part.title, level=2)
                     doc.add_paragraph(part.content)

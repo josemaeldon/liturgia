@@ -97,7 +97,17 @@ class LiturgiaDaily:
             )
             
             first_reading = Reading(reference=data.get("first_reading", ""))
-            psalm = Psalm(number=71, reference=data.get("psalm", ""))
+            # Parse psalm number from reference if available
+            psalm_ref = data.get("psalm", "")
+            psalm_num = 71  # default
+            if psalm_ref:
+                # Try to extract number from reference like "Sl 71(72)"
+                import re
+                match = re.search(r'Sl\s*(\d+)', psalm_ref)
+                if match:
+                    psalm_num = int(match.group(1))
+            
+            psalm = Psalm(number=psalm_num, reference=psalm_ref)
             second_reading = Reading(reference=data.get("second_reading", "")) if "second_reading" in data else None
             gospel = Reading(reference=data.get("gospel", ""))
             
