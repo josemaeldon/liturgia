@@ -5,6 +5,12 @@ python-dateutil~=2.8.0
 Flask~=3.0.0
 Flask-WTF~=1.2.0
 
+# Production server
+gunicorn~=21.2.0
+
 # Optional dependencies for export features
 reportlab~=3.6.0  # PDF generation
 python-docx~=0.8.11  # DOCX generation
+
+# Health check
+requests~=2.31.0
