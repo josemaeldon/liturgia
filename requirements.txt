@@ -19,6 +19,3 @@ python-docx~=0.8.11  # DOCX generation
 
 # Health check
 requests~=2.31.0
-
-# Utility
-curl~=0.0.1  # For health checks in Docker
