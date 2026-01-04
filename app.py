@@ -5,35 +5,39 @@ Modern, responsive interface for daily liturgy and Mass customization
 """
 
 from flask import Flask, render_template, request, jsonify, send_file, flash, redirect, url_for
+from flask_migrate import Migrate
 from datetime import datetime, date, timedelta
 import os
 import io
 from models.daily_liturgy import LiturgiaDaily
 from models.liturgy_hours import LiturgiaHoras
 from models.custom_mass import CustomMass
+from models.db_models import db
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
 
-# Database configuration (optional - for future use with PostgreSQL)
-# Currently the app uses in-memory data structures
-# To enable database support, uncomment and configure:
-#
-# from flask_sqlalchemy import SQLAlchemy
-# 
-# db_connection = os.environ.get('DB_CONNECTION', 'sqlite')
-# if db_connection == 'pgsql':
-#     db_host = os.environ.get('DB_HOST', 'localhost')
-#     db_port = os.environ.get('DB_PORT', '5432')
-#     db_database = os.environ.get('DB_DATABASE', 'liturgia_db')
-#     db_username = os.environ.get('DB_USERNAME', 'postgres')
-#     db_password = os.environ.get('DB_PASSWORD', '')
-#     app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{db_username}:{db_password}@{db_host}:{db_port}/{db_database}'
-# else:
-#     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///liturgia.db'
-# 
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-# db = SQLAlchemy(app)
+# Database configuration with PostgreSQL
+db_connection = os.environ.get('DB_CONNECTION', 'pgsql')
+if db_connection == 'pgsql':
+    db_host = os.environ.get('DB_HOST', 'localhost')
+    db_port = os.environ.get('DB_PORT', '5432')
+    db_database = os.environ.get('DB_DATABASE', 'liturgia_db')
+    db_username = os.environ.get('DB_USERNAME', 'postgres')
+    db_password = os.environ.get('DB_PASSWORD', '')
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{db_username}:{db_password}@{db_host}:{db_port}/{db_database}'
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///liturgia.db'
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+    'pool_pre_ping': True,
+    'pool_recycle': 300,
+}
+
+# Initialize database and migrations
+db.init_app(app)
+migrate = Migrate(app, db)
 
 # Configure upload folder for temporary PDF files
 # In production, use a secure directory with proper permissions

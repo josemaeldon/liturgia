@@ -47,10 +47,11 @@ RUN mkdir -p /var/www/storage \
     ${APACHE_LOCK_DIR} \
     ${APACHE_LOG_DIR}
 
-# Set permissions
+# Set permissions and make entrypoint executable
 RUN chown -R www-data:www-data /var/www /tmp/liturgia_pdfs \
     && chmod -R 755 /var/www \
-    && chmod -R 777 /tmp/liturgia_pdfs
+    && chmod -R 777 /tmp/liturgia_pdfs \
+    && chmod +x /var/www/entrypoint.sh
 
 # Create WSGI file
 RUN echo 'import sys\n\
@@ -104,5 +105,5 @@ EXPOSE 80
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
     CMD curl -f http://localhost/ || exit 1
 
-# Start Apache in foreground
-CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+# Use entrypoint script to initialize database and start Apache
+ENTRYPOINT ["/var/www/entrypoint.sh"]

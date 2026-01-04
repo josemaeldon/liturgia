@@ -8,6 +8,7 @@ Flask-WTF~=1.2.0
 # Database support
 psycopg2-binary~=2.9.9  # PostgreSQL adapter
 Flask-SQLAlchemy~=3.1.1  # SQLAlchemy integration for Flask
+Flask-Migrate~=4.0.5  # Database migrations
 
 # Production server
 gunicorn~=21.2.0

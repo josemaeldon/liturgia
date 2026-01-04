@@ -1,5 +1,6 @@
 # Docker Compose / Docker Swarm Stack file for Liturgia System
 # Production deployment with PostgreSQL and Apache
+# All environment variables are configured directly in the stack
 version: '3.8'
 
 services:
@@ -18,22 +19,22 @@ services:
       APP_NAME: "Liturgia Católica"
       APP_ENV: production
       APP_DEBUG: "false"
-      APP_URL: https://liturgia.example.com
+      APP_URL: https://liturgia.santaluzia.org
 
-      # Database configuration
+      # Database configuration - CHANGE THESE VALUES
       DB_CONNECTION: pgsql
       DB_HOST: postgres
       DB_PORT: 5432
       DB_DATABASE: liturgia_db
       DB_USERNAME: postgres
-      DB_PASSWORD: ${DB_PASSWORD:-change-this-password}
+      DB_PASSWORD: "liturgia_db_password_2024_change_this"  # CHANGE THIS PASSWORD
 
       # Redis configuration (optional, for caching)
       REDIS_HOST: redis
       REDIS_PORT: 6379
 
-      # Flask secret key
-      SECRET_KEY: ${SECRET_KEY:-change-this-secret-key-in-production}
+      # Flask secret key - CHANGE THIS
+      SECRET_KEY: "your-super-secret-key-here-change-this-to-random-string"  # CHANGE THIS KEY
       FLASK_ENV: production
       FLASK_DEBUG: "false"
       UPLOAD_FOLDER: /var/www/storage
@@ -72,7 +73,7 @@ services:
         - traefik.enable=true
         - traefik.docker.network=liturgianet
 
-        - traefik.http.routers.liturgia.rule=Host(`liturgia.example.com`)
+        - traefik.http.routers.liturgia.rule=Host(`liturgia.santaluzia.org`)
         - traefik.http.routers.liturgia.entrypoints=websecure
         - traefik.http.routers.liturgia.tls.certresolver=letsencryptresolver
         - traefik.http.services.liturgia.loadbalancer.server.port=80
@@ -93,7 +94,7 @@ services:
     environment:
       POSTGRES_DB: liturgia_db
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-change-this-password}
+      POSTGRES_PASSWORD: "liturgia_db_password_2024_change_this"  # MUST MATCH DB_PASSWORD ABOVE
       PGDATA: /var/lib/postgresql/data/pgdata
 
     volumes:
