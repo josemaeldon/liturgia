@@ -1,0 +1,6 @@
+# Core dependencies
+python-dateutil~=2.8.0
+
+# Optional dependencies for export features
+reportlab~=3.6.0  # PDF generation
+python-docx~=0.8.11  # DOCX generation
