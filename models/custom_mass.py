@@ -298,8 +298,9 @@ class CustomMass:
             if include_header and self.celebration:
                 story.append(Paragraph(self.celebration.name.upper(), title_style))
                 info_text = f"Data: {self.celebration.date.strftime('%d/%m/%Y')}"
-                if hasattr(self.celebration, 'color'):
-                    info_text += f" | Cor Litúrgica: {self.celebration.color.value.title()}"
+                if hasattr(self.celebration, 'color') and self.celebration.color:
+                    color_name = str(self.celebration.color).title()
+                    info_text += f" | Cor Litúrgica: {color_name}"
                 story.append(Paragraph(info_text, body_style))
                 story.append(Spacer(1, 0.3*inch))
             

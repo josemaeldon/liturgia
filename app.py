@@ -246,7 +246,7 @@ def api_liturgy(date_str):
             'success': True,
             'date': date_str,
             'celebration': liturgy.celebration.name,
-            'color': liturgy.celebration.color.value if liturgy.celebration.color else None,
+            'color': str(liturgy.celebration.color) if liturgy.celebration.color else None,
             'season': liturgy.celebration.season,
             'readings': {
                 'first': liturgy.first_reading.reference if liturgy.first_reading else None,
