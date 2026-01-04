@@ -15,15 +15,34 @@ Sistema completo para gerenciamento e personalização de liturgias católicas, 
   - Liturgia Eucarística (Ofertório, Oração Eucarística, Pai Nosso, Comunhão)
   - Ritos Finais (Bênção, Despedida)
 
+## 🚀 Início Rápido
+
+```bash
+# 1. Clone o repositório
+git clone https://github.com/josemaeldon/liturgia.git
+cd liturgia
+
+# 2. Instale as dependências (opcional, para exportar PDF/DOCX)
+pip install -r requirements.txt
+
+# 3. Execute a demonstração
+python demo.py
+
+# 4. Ou execute os exemplos
+python examples/example_epifania.py
+python examples/example_daily_liturgy.py
+python examples/example_liturgy_hours.py
+```
+
 ## Estrutura do Projeto
 
 ```
 liturgia/
 ├── models/          # Modelos de dados para componentes litúrgicos
-├── data/           # Dados litúrgicos (leituras, orações, etc.)
-├── templates/      # Templates para diferentes tipos de liturgias
-├── examples/       # Exemplos de liturgias personalizadas
-└── utils/          # Utilitários para formatação e exportação
+├── examples/        # Exemplos completos de uso
+├── USAGE.md        # Guia detalhado de uso
+├── demo.py         # Demonstração do sistema
+└── requirements.txt # Dependências opcionais
 ```
 
 ## Uso Básico
@@ -72,12 +91,10 @@ mass.export_to_docx("epifania_2026.docx")
 
 ## Instalação
 
-```bash
-# Clonar o repositório
-git clone https://github.com/josemaeldon/liturgia.git
-cd liturgia
+**Nenhuma instalação especial necessária!** O sistema funciona apenas com Python 3.8+.
 
-# Instalar dependências
+```bash
+# Opcional: Para exportar PDF e DOCX
 pip install -r requirements.txt
 ```
 
