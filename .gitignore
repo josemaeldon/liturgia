@@ -44,3 +44,10 @@ Thumbs.db
 # *.txt
 # *.pdf
 # *.docx
+
+# Flask
+instance/
+.webassets-cache
+
+# Temporary PDF files
+/tmp/liturgia_pdfs/

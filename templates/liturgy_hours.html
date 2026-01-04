@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}Liturgia das Horas{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center py-5">
+                    <h1 class="display-4 mb-3">
+                        <i class="bi bi-clock-history text-primary"></i>
+                        Liturgia das Horas
+                    </h1>
+                    <p class="lead text-muted mb-0">
+                        As sete horas canônicas da oração da Igreja
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hour Selector -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="mb-3">Selecione a Hora Canônica:</h5>
+                    <div class="hour-selector">
+                        <a href="?hour=office_readings" 
+                           class="hour-btn {% if selected_hour == 'office_readings' %}active{% endif %}">
+                            <i class="bi bi-moon-stars d-block mb-2"></i>
+                            Ofício das Leituras
+                        </a>
+                        <a href="?hour=laudes" 
+                           class="hour-btn {% if selected_hour == 'laudes' %}active{% endif %}">
+                            <i class="bi bi-sunrise d-block mb-2"></i>
+                            Laudes
+                        </a>
+                        <a href="?hour=terca" 
+                           class="hour-btn {% if selected_hour == 'terca' %}active{% endif %}">
+                            <i class="bi bi-clock d-block mb-2"></i>
+                            Terça (9h)
+                        </a>
+                        <a href="?hour=sexta" 
+                           class="hour-btn {% if selected_hour == 'sexta' %}active{% endif %}">
+                            <i class="bi bi-sun d-block mb-2"></i>
+                            Sexta (12h)
+                        </a>
+                        <a href="?hour=nona" 
+                           class="hour-btn {% if selected_hour == 'nona' %}active{% endif %}">
+                            <i class="bi bi-clock-fill d-block mb-2"></i>
+                            Nona (15h)
+                        </a>
+                        <a href="?hour=vesperas" 
+                           class="hour-btn {% if selected_hour == 'vesperas' %}active{% endif %}">
+                            <i class="bi bi-sunset d-block mb-2"></i>
+                            Vésperas
+                        </a>
+                        <a href="?hour=completas" 
+                           class="hour-btn {% if selected_hour == 'completas' %}active{% endif %}">
+                            <i class="bi bi-moon d-block mb-2"></i>
+                            Completas
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hour Content -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body p-4">
+                    <div class="reading-section">
+                        <pre class="reading-text" style="white-space: pre-wrap; font-family: var(--font-heading);">{{ hour_data.format() }}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card bg-light border-0">
+                <div class="card-body text-center">
+                    <h5 class="mb-3">Explore mais</h5>
+                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                        <a href="{{ url_for('daily_liturgy') }}" class="btn btn-outline-primary">
+                            <i class="bi bi-calendar-day me-2"></i>
+                            Liturgia Diária
+                        </a>
+                        <a href="{{ url_for('custom_mass') }}" class="btn btn-outline-primary">
+                            <i class="bi bi-pencil-square me-2"></i>
+                            Missa Personalizada
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

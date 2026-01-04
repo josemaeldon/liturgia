@@ -1,0 +1,286 @@
+{% extends "base.html" %}
+
+{% block title %}Personalizar PDF - Folheto de Missa{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center py-5">
+                    <h1 class="display-4 mb-3">
+                        <i class="bi bi-file-earmark-pdf text-primary"></i>
+                        Personalizar Folheto de Missa
+                    </h1>
+                    <p class="lead text-muted mb-0">
+                        Crie um folheto personalizado com a aparência profissional
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form method="POST" action="{{ url_for('customize_pdf') }}" id="pdf-customization-form">
+        <div class="row">
+            <!-- Customization Panel -->
+            <div class="col-lg-4 mb-4">
+                <div class="customization-panel sticky-top" style="top: 100px;">
+                    <h5>
+                        <i class="bi bi-sliders me-2"></i>
+                        Opções de Personalização
+                    </h5>
+
+                    <!-- Content Section -->
+                    <div class="option-group">
+                        <h6 class="text-secondary mb-3">Conteúdo</h6>
+                        
+                        <div class="mb-3">
+                            <label for="celebration_name" class="form-label">Nome da Celebração</label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="celebration_name" 
+                                   name="celebration_name" 
+                                   placeholder="Missa Dominical"
+                                   value="Missa Dominical">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="celebration_date" class="form-label">Data</label>
+                            <input type="date" 
+                                   class="form-control" 
+                                   id="celebration_date" 
+                                   name="celebration_date" 
+                                   value="{{ today }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="first_reading" class="form-label">Primeira Leitura</label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="first_reading" 
+                                   name="first_reading" 
+                                   placeholder="Ex: Is 49,3.5-6">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="psalm" class="form-label">Salmo</label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="psalm" 
+                                   name="psalm" 
+                                   placeholder="Ex: Sl 39(40)">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="gospel" class="form-label">Evangelho</label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="gospel" 
+                                   name="gospel" 
+                                   placeholder="Ex: Jo 1,29-34">
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- Style Section -->
+                    <div class="option-group">
+                        <h6 class="text-secondary mb-3">Aparência</h6>
+                        
+                        <div class="mb-3">
+                            <label for="liturgical_color" class="form-label">Cor Litúrgica</label>
+                            <select class="form-select" id="liturgical_color" name="liturgical_color">
+                                <option value="verde" selected>Verde</option>
+                                <option value="branco">Branco</option>
+                                <option value="vermelho">Vermelho</option>
+                                <option value="roxo">Roxo</option>
+                                <option value="dourado">Dourado</option>
+                                <option value="preto">Preto</option>
+                            </select>
+                            <div class="mt-2">
+                                <span class="liturgical-color verde" id="color-indicator"></span>
+                                <span class="small text-muted">Indicador de cor</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="font_family" class="form-label">Fonte</label>
+                            <select class="form-select" id="font_family" name="font_family">
+                                <option value="Times-Roman" selected>Times New Roman (Clássica)</option>
+                                <option value="Helvetica">Helvetica (Moderna)</option>
+                                <option value="Courier">Courier (Máquina de escrever)</option>
+                            </select>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6 mb-3">
+                                <label for="font_size" class="form-label">Tamanho da Fonte</label>
+                                <input type="number" 
+                                       class="form-control" 
+                                       id="font_size" 
+                                       name="font_size" 
+                                       min="8" 
+                                       max="16" 
+                                       value="12">
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label for="title_size" class="form-label">Tamanho do Título</label>
+                                <input type="number" 
+                                       class="form-control" 
+                                       id="title_size" 
+                                       name="title_size" 
+                                       min="14" 
+                                       max="24" 
+                                       value="18">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="page_size" class="form-label">Tamanho da Página</label>
+                            <select class="form-select" id="page_size" name="page_size">
+                                <option value="A4" selected>A4 (210 x 297 mm)</option>
+                                <option value="Letter">Carta (216 x 279 mm)</option>
+                                <option value="A5">A5 (148 x 210 mm)</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="margins" class="form-label">Margens (pontos)</label>
+                            <input type="number" 
+                                   class="form-control" 
+                                   id="margins" 
+                                   name="margins" 
+                                   min="36" 
+                                   max="108" 
+                                   value="72"
+                                   step="18">
+                            <small class="text-muted">72 pontos = 2.54 cm</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" 
+                                       type="checkbox" 
+                                       id="include_header" 
+                                       name="include_header"
+                                       checked>
+                                <label class="form-check-label" for="include_header">
+                                    Incluir Cabeçalho
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" 
+                                       type="checkbox" 
+                                       id="include_footer" 
+                                       name="include_footer"
+                                       checked>
+                                <label class="form-check-label" for="include_footer">
+                                    Incluir Rodapé
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Generate Button -->
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="bi bi-download me-2"></i>
+                            Gerar PDF
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preview Panel -->
+            <div class="col-lg-8 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="mb-3">
+                            <i class="bi bi-eye me-2"></i>
+                            Visualização do Folheto
+                        </h5>
+                        <div class="preview-panel" id="pdf-preview">
+                            <div class="text-center">
+                                <i class="bi bi-file-earmark-pdf display-1 mb-3"></i>
+                                <h5>Pré-visualização do PDF</h5>
+                                <p class="mb-0">
+                                    Configure as opções ao lado e clique em "Gerar PDF" 
+                                    para criar seu folheto personalizado de missa.
+                                </p>
+                                <div class="mt-4">
+                                    <div class="card text-start mx-auto" style="max-width: 500px;">
+                                        <div class="card-body">
+                                            <h6 class="text-primary">O PDF incluirá:</h6>
+                                            <ul class="mb-0">
+                                                <li>Nome e data da celebração</li>
+                                                <li>Cor litúrgica destacada</li>
+                                                <li>Referências das leituras</li>
+                                                <li>Estrutura completa da missa</li>
+                                                <li>Formatação profissional</li>
+                                                <li>Pronto para impressão</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sample Templates -->
+                <div class="card shadow-sm mt-4">
+                    <div class="card-body">
+                        <h5 class="mb-3">
+                            <i class="bi bi-layout-text-window-reverse me-2"></i>
+                            Modelos Sugeridos
+                        </h5>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="card text-center h-100 hover-shadow">
+                                    <div class="card-body">
+                                        <i class="bi bi-file-text display-4 text-primary mb-2"></i>
+                                        <h6>Clássico</h6>
+                                        <p class="small text-muted mb-0">Times New Roman, A4</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card text-center h-100 hover-shadow">
+                                    <div class="card-body">
+                                        <i class="bi bi-file-text display-4 text-success mb-2"></i>
+                                        <h6>Moderno</h6>
+                                        <p class="small text-muted mb-0">Helvetica, A4</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card text-center h-100 hover-shadow">
+                                    <div class="card-body">
+                                        <i class="bi bi-file-text display-4 text-warning mb-2"></i>
+                                        <h6>Compacto</h6>
+                                        <p class="small text-muted mb-0">Helvetica, A5</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Update color indicator when liturgical color changes
+    document.getElementById('liturgical_color').addEventListener('change', function() {
+        const colorIndicator = document.getElementById('color-indicator');
+        colorIndicator.className = 'liturgical-color ' + this.value;
+    });
+</script>
+{% endblock %}

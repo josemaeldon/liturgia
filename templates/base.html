@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema de Liturgia Católica - Liturgia Diária, Liturgia das Horas e Personalização de Missas">
+    <title>{% block title %}Liturgia Católica{% endblock %}</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top shadow">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="{{ url_for('index') }}">
+                <i class="bi bi-book-half me-2 fs-4"></i>
+                <span class="fw-bold">Liturgia Católica</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'daily_liturgy' %}active{% endif %}" 
+                           href="{{ url_for('daily_liturgy') }}">
+                            <i class="bi bi-calendar-day me-1"></i> Liturgia Diária
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'liturgy_hours' %}active{% endif %}" 
+                           href="{{ url_for('liturgy_hours') }}">
+                            <i class="bi bi-clock-history me-1"></i> Liturgia das Horas
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'custom_mass' %}active{% endif %}" 
+                           href="{{ url_for('custom_mass') }}">
+                            <i class="bi bi-pencil-square me-1"></i> Missa Personalizada
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'customize_pdf' %}active{% endif %}" 
+                           href="{{ url_for('customize_pdf') }}">
+                            <i class="bi bi-file-earmark-pdf me-1"></i> Personalizar PDF
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'admin' %}active{% endif %}" 
+                           href="{{ url_for('admin') }}">
+                            <i class="bi bi-gear me-1"></i> Admin
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="container mt-3">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show" role="alert">
+                        <i class="bi bi-{% if category == 'error' %}exclamation-triangle{% elif category == 'success' %}check-circle{% else %}info-circle{% endif %} me-2"></i>
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main Content -->
+    <main class="py-4">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <h5 class="fw-bold mb-3">
+                        <i class="bi bi-book-half me-2"></i>Liturgia Católica
+                    </h5>
+                    <p class="text-white-50">
+                        Sistema completo para consulta e personalização da liturgia católica seguindo o Missal Romano.
+                    </p>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <h6 class="fw-bold mb-3">Links Rápidos</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a href="{{ url_for('daily_liturgy') }}" class="text-white-50 text-decoration-none">
+                                <i class="bi bi-chevron-right small"></i> Liturgia Diária
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="{{ url_for('liturgy_hours') }}" class="text-white-50 text-decoration-none">
+                                <i class="bi bi-chevron-right small"></i> Liturgia das Horas
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="{{ url_for('custom_mass') }}" class="text-white-50 text-decoration-none">
+                                <i class="bi bi-chevron-right small"></i> Missa Personalizada
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="fw-bold mb-3">Sobre</h6>
+                    <p class="text-white-50 small">
+                        Seguindo o calendário litúrgico do Missal Romano, oferecemos uma experiência moderna 
+                        e acessível para acompanhar a liturgia católica.
+                    </p>
+                </div>
+            </div>
+            <hr class="my-4 bg-secondary">
+            <div class="text-center text-white-50 small">
+                <p class="mb-0">&copy; 2026 Liturgia Católica. Desenvolvido com <i class="bi bi-heart-fill text-danger"></i> para a Igreja.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

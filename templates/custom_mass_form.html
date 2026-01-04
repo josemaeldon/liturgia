@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+
+{% block title %}Criar Missa Personalizada{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center py-5">
+                    <h1 class="display-4 mb-3">
+                        <i class="bi bi-pencil-square text-primary"></i>
+                        Missa Personalizada
+                    </h1>
+                    <p class="lead text-muted mb-0">
+                        Crie e personalize sua celebração eucarística
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form -->
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <form method="POST" action="{{ url_for('custom_mass') }}" class="needs-validation" novalidate>
+                        <!-- Celebration Details -->
+                        <div class="mb-4">
+                            <h4 class="text-primary border-bottom pb-2 mb-3">
+                                <i class="bi bi-info-circle me-2"></i>
+                                Dados da Celebração
+                            </h4>
+                            
+                            <div class="mb-3">
+                                <label for="celebration_name" class="form-label">
+                                    Nome da Celebração *
+                                </label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="celebration_name" 
+                                       name="celebration_name" 
+                                       placeholder="Ex: Domingo - 2º Tempo Comum"
+                                       required>
+                                <div class="invalid-feedback">
+                                    Por favor, informe o nome da celebração.
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="celebration_date" class="form-label">
+                                        Data *
+                                    </label>
+                                    <input type="date" 
+                                           class="form-control" 
+                                           id="celebration_date" 
+                                           name="celebration_date" 
+                                           value="{{ today }}"
+                                           required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="celebration_color" class="form-label">
+                                        Cor Litúrgica *
+                                    </label>
+                                    <select class="form-select" 
+                                            id="celebration_color" 
+                                            name="celebration_color"
+                                            required>
+                                        <option value="verde" selected>Verde</option>
+                                        <option value="branco">Branco</option>
+                                        <option value="vermelho">Vermelho</option>
+                                        <option value="roxo">Roxo</option>
+                                        <option value="dourado">Dourado</option>
+                                        <option value="preto">Preto</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Entrance Antiphon -->
+                        <div class="mb-4">
+                            <h4 class="text-primary border-bottom pb-2 mb-3">
+                                <i class="bi bi-door-open me-2"></i>
+                                Ritos Iniciais
+                            </h4>
+                            
+                            <div class="mb-3">
+                                <label for="entrance_antiphon" class="form-label">
+                                    Antífona de Entrada
+                                </label>
+                                <textarea class="form-control" 
+                                          id="entrance_antiphon" 
+                                          name="entrance_antiphon" 
+                                          rows="3"
+                                          placeholder="Digite a antífona de entrada..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Readings -->
+                        <div class="mb-4">
+                            <h4 class="text-primary border-bottom pb-2 mb-3">
+                                <i class="bi bi-book me-2"></i>
+                                Liturgia da Palavra
+                            </h4>
+                            
+                            <div class="mb-3">
+                                <label for="first_reading" class="form-label">
+                                    Primeira Leitura
+                                </label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="first_reading" 
+                                       name="first_reading" 
+                                       placeholder="Ex: Is 49,3.5-6">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="psalm" class="form-label">
+                                    Salmo Responsorial
+                                </label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="psalm" 
+                                       name="psalm" 
+                                       placeholder="Ex: Sl 39(40)">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="second_reading" class="form-label">
+                                    Segunda Leitura
+                                </label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="second_reading" 
+                                       name="second_reading" 
+                                       placeholder="Ex: 1Cor 1,1-3">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="gospel" class="form-label">
+                                    Evangelho *
+                                </label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="gospel" 
+                                       name="gospel" 
+                                       placeholder="Ex: Jo 1,29-34"
+                                       required>
+                                <div class="invalid-feedback">
+                                    O Evangelho é obrigatório.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Communion Antiphon -->
+                        <div class="mb-4">
+                            <h4 class="text-primary border-bottom pb-2 mb-3">
+                                <i class="bi bi-cup-straw me-2"></i>
+                                Rito da Comunhão
+                            </h4>
+                            
+                            <div class="mb-3">
+                                <label for="communion_antiphon" class="form-label">
+                                    Antífona da Comunhão
+                                </label>
+                                <textarea class="form-control" 
+                                          id="communion_antiphon" 
+                                          name="communion_antiphon" 
+                                          rows="3"
+                                          placeholder="Digite a antífona da comunhão..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Submit Buttons -->
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{{ url_for('daily_liturgy') }}" class="btn btn-outline-secondary">
+                                <i class="bi bi-x-circle me-2"></i>
+                                Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle me-2"></i>
+                                Criar Missa
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Form validation
+    (function() {
+        'use strict';
+        var forms = document.querySelectorAll('.needs-validation');
+        Array.prototype.slice.call(forms).forEach(function(form) {
+            form.addEventListener('submit', function(event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
+</script>
+{% endblock %}
