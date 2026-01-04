@@ -330,37 +330,6 @@ class LiturgiaHoras:
         
         return completas
     
-    @classmethod
-    def get_office_readings(cls, date_str: str) -> Hour:
-        """Get Office of Readings for a specific date"""
-        liturgy_date = datetime.strptime(date_str, "%Y-%m-%d").date()
-        
-        office = Hour(
-            name="Ofício das Leituras",
-            time="Durante a noite ou primeira hora do dia",
-            hymn="Da luz primeira, Criador,\nque separaste a treva do esplendor...",
-            psalms=[
-                Psalm(number=1, reference="Sl 1",
-                      response="Feliz o homem que ama a lei do Senhor.",
-                      verses=["Feliz o homem que não se guia..."]),
-                Psalm(number=2, reference="Sl 2",
-                      response="Felizes os que no Senhor se refugiam.",
-                      verses=["Por que se agitam as nações..."])
-            ],
-            antiphons=[
-                "A minha boca anunciará vosso louvor",
-                "Adoremos ao Senhor, que nos criou"
-            ],
-            reading="Primeira Leitura: Leitura longa da Sagrada Escritura\nSegunda Leitura: Leitura dos Santos Padres ou escritores eclesiásticos",
-            prayers=[
-                Prayer(
-                    title="Oração Final",
-                    text="Deus eterno e todo-poderoso, que nos congregais para rezarmos no início deste dia..."
-                )
-            ]
-        )
-        
-        return office
 
 
     @classmethod

@@ -6,8 +6,8 @@ Cor Litúrgica: branco
 ================================================================================
 
 
-Canto de Entrada
-================
+Antífona de Entrada
+===================
 Antífona de Entrada
 Eis que vem o Senhor soberano; o reino e o poder e o império estão em suas mãos.
 (Cf. Ml 3,1; 1Cr 29,12)
@@ -130,8 +130,8 @@ Palavra do Senhor.
 R. Graças a Deus.
 
 
-Aclamação ao Evangelho
-======================
+Aclamação ao Evangelho (Aleluia)
+================================
 R. Aleluia, Aleluia, Aleluia.
 
 Vimos a sua estrela no oriente
@@ -276,11 +276,6 @@ O céu e a terra proclamam a vossa glória.
 Hosana nas alturas!
 Bendito o que vem em nome do Senhor!
 Hosana nas alturas!
-
-
-Oração Eucarística
-==================
-(Oração Eucarística - conforme escolha do celebrante)
 
 
 Pai Nosso
