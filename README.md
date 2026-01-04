@@ -126,18 +126,14 @@ pip install -r requirements.txt
 
 ## 🐳 Deploy em Produção
 
-Para deploy em produção com **PostgreSQL + Apache** no Docker Swarm:
+### Guias de Deployment
 
-📖 **[Guia Completo de Deploy: POSTGRES_APACHE_DEPLOYMENT.md](POSTGRES_APACHE_DEPLOYMENT.md)**
+- 🚀 **[Deploy Rápido: QUICK_DEPLOYMENT.md](QUICK_DEPLOYMENT.md)** - Referência rápida e comparação de opções
+- 📖 **[PostgreSQL + Apache: POSTGRES_APACHE_DEPLOYMENT.md](POSTGRES_APACHE_DEPLOYMENT.md)** - Stack completa para produção
+- 📘 **[Outras Opções: DEPLOYMENT.md](DEPLOYMENT.md)** - Gunicorn, Nginx, Systemd
+- 🐋 **[Docker Básico: DOCKER_DEPLOYMENT.md](DOCKER_DEPLOYMENT.md)** - Deploy simples com Docker
 
-Este guia inclui:
-- Stack completa com PostgreSQL, Apache e Redis
-- Configuração com Traefik para SSL automático
-- Variáveis de ambiente e secrets
-- Backup e restore
-- Monitoramento e troubleshooting
-
-### Deploy Rápido
+### Deploy Rápido (PostgreSQL + Apache + Docker Swarm)
 
 ```bash
 # 1. Configurar variáveis de ambiente
