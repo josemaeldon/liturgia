@@ -187,19 +187,40 @@
 
 <script>
 function loadYear(year) {
-    alert('Carregando calendário para o ano: ' + year);
+    // In a real implementation, this would reload calendar data for the selected year
+    console.log('Loading calendar for year: ' + year);
+    // Year selection is already functional via the select element
 }
 
 function exportCalendar() {
-    alert('Funcionalidade de exportação em desenvolvimento');
+    // Show temporary message
+    const btn = event.target.closest('button');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<i class="bi bi-info-circle me-2"></i>Em desenvolvimento';
+    btn.disabled = true;
+    
+    setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+    }, 2000);
 }
 
 function importCalendar() {
-    alert('Funcionalidade de importação em desenvolvimento');
+    // Show temporary message
+    const btn = event.target.closest('button');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<i class="bi bi-info-circle me-2"></i>Em desenvolvimento';
+    btn.disabled = true;
+    
+    setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+    }, 2000);
 }
 
 function editDate(date) {
-    alert('Editar data: ' + date);
+    // In a real implementation, this would open an edit form or navigate to edit page
+    window.location.href = '/admin/edit-liturgy?date=' + date;
 }
 </script>
 {% endblock %}

@@ -128,7 +128,21 @@ function searchLiturgy() {
     const date = document.getElementById('search_date').value;
     if (date) {
         // In a real implementation, this would fetch liturgy data via AJAX
-        alert('Buscar liturgia para: ' + date);
+        // For now, just populate the form with the selected date
+        document.getElementById('liturgy_date').value = date;
+        
+        // Show a message that this feature is under development
+        const searchButton = event.target;
+        const originalText = searchButton.innerHTML;
+        searchButton.innerHTML = '<i class="bi bi-info-circle me-2"></i>Funcionalidade em desenvolvimento';
+        searchButton.classList.add('btn-warning');
+        searchButton.classList.remove('btn-primary');
+        
+        setTimeout(() => {
+            searchButton.innerHTML = originalText;
+            searchButton.classList.remove('btn-warning');
+            searchButton.classList.add('btn-primary');
+        }, 2000);
     }
 }
 </script>
