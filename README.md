@@ -11,6 +11,8 @@ Sistema web moderno e completo para gerenciamento, consulta e personalização d
 
 ## 📖 Índice
 
+> 📚 **[Índice Completo da Documentação →](DOCS_INDEX.md)** - Guia de toda a documentação disponível
+
 - [Visão Geral](#-visão-geral)
 - [Características](#-características)
 - [Instalação](#-instalação)
@@ -160,22 +162,23 @@ python examples/example_custom_mass.py        # Missa personalizada
 
 ## 📚 Documentação
 
-### Guias de Instalação
+> 📚 **[Índice Completo da Documentação →](DOCS_INDEX.md)** - Acesse o índice completo com todos os guias
+
+### 🚀 Guias de Instalação
 - 📦 **[INSTALL_LOCAL.md](INSTALL_LOCAL.md)** - Instalação local detalhada (desenvolvimento)
 - 🐳 **[INSTALL_PORTAINER.md](INSTALL_PORTAINER.md)** - Instalação no Portainer passo a passo (produção)
+- 🐋 **[DOCKER_DEPLOYMENT.md](DOCKER_DEPLOYMENT.md)** - Deploy com Docker CLI
+- 📘 **[DEPLOYMENT.md](DEPLOYMENT.md)** - Deploy manual (Gunicorn, Nginx)
 
-### Guias de Uso
-- 📖 **[USAGE.md](USAGE.md)** - Guia completo de uso da aplicação
+### 📖 Guias de Uso
+- 📖 **[USAGE.md](USAGE.md)** - Guia completo de uso da API Python
+- 🌐 **[WEB_README.md](WEB_README.md)** - Interface web e funcionalidades
 
-### Guias Técnicos
+### 🔧 Documentação Técnica
+- 🏗️ **[ARCHITECTURE.md](ARCHITECTURE.md)** - Arquitetura do sistema
 - 🗄️ **[DATABASE_INTEGRATION.md](DATABASE_INTEGRATION.md)** - Integração com PostgreSQL
-- 🐋 **[DOCKER_DEPLOYMENT.md](DOCKER_DEPLOYMENT.md)** - Deploy com Docker
-- 📘 **[DEPLOYMENT.md](DEPLOYMENT.md)** - Outras opções de deployment
-
-### Arquivos de Configuração
-- `.env.example` - Exemplo de variáveis de ambiente
-- `docker-compose.yml` - Configuração Docker Swarm/Compose
-- `requirements.txt` - Dependências Python
+- ⚙️ **[.env.example](.env.example)** - Exemplo de variáveis de ambiente
+- 🐳 **[docker-compose.yml](docker-compose.yml)** - Configuração Docker
 
 ---
 
